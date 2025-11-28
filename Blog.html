@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Mi Rincón de Baloncesto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo"> Baloncesto</div>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="Iniciar sesión.html">Iniciar sesión</a>
+            <a href="Registro.html">Registro</a>
+            <a href="Blog.html">Blog</a> 
+            <a href="contacto.html">Contacto</a>
+            <a href="portafolio.html">portafolio</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2> Blog de Baloncesto</h2>
+            <article class="blog-post">
+                <h3>Baloncesto: HistoriaReglas Fundamentales y Legado Olímpico</h3>
+                <p class="post-meta">Publicado el 21 de Noviembre, 2025</p>
+                
+                <img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2018/03/29/15223413143393.jpg" alt="Jugador de baloncesto haciendo un mate" class="post-image">
+
+                <h4>Un Deporte Nacido de la Necesidad</h4>
+                <p>El baloncesto fue inventado por el profesor canadiense **James Naismith** en 1891, buscando un deporte que se pudiera jugar bajo techo durante el duro invierno. Desde sus cestas de melocotones originales, ha evolucionado hasta convertirse en un fenómeno global.</p>
+
+                <h4>Las Reglas Clave</h4>
+                <ul>
+                    <li>Equipos: Dos equipos de cinco jugadores cada uno en la cancha.</li>
+                    <li>Duración: Cuatro cuartos de 10 o 12 minutos.</li>
+                    <li>Driblar:El jugador debe botar el balón para moverse con él.</li>
+                    <li>24 Segundos: Límite de tiempo para intentar un tiro al aro.</li>
+                    <li>hacer desde tiro libre de tres o un doble ritmo</li>
+                </ul>
+                
+                <button class="btn-open">Suscríbete para recibir más posts!</button>
+                <a href="index.html" class="back-to-top">Volver al Inicio ↑</a>
+            </article>
+        </section>
+    </main>
+    
+    <div class="modal hidden">
+        <button class="btn-close">&times;</button> 
+        <h3>Unete a la Comunidad Baloncesto!</h3>
+        <p>Regístrate para recibir las últimas noticias y análisis en tu correo.</p>
+        <form>
+            <input type="text" placeholder="Tu Nombre">
+            <input type="email" placeholder="Tu Email">
+            <button type="submit" class="btn-action">Suscribirme</button>
+        </form>
+    </div>
+    <div class="overlay hidden"></div> 
+
+    <script src="script.js"></script>
+</body>
+</html>

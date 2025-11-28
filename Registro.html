@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | Baloncesto Total</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">Baloncesto Total</div>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="Iniciar sesión.html">Iniciar sesión</a>
+            <a href="Registro.html">Registro</a>
+            <a href="Blog.html">Blog</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="portafolio.html">Portafolio</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="registro" class="hero hero-background-image">
+            <div class="hero-content">
+                <h1>¡Crea tu Cuenta!</h1>
+                <p>Forma parte de la comunidad más apasionada del baloncesto.</p>
+                <button class="btn-open btn-primary">Registrarme</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal hidden">
+        <button class="btn-close">&times;</button>
+        <h3>Formulario de Registro</h3>
+        <p>Completa tus datos para crear tu cuenta.</p>
+        
+        <form>
+            <input type="text" placeholder="Nombre completo" required>
+            <input type="email" placeholder="Correo electrónico" required>
+            <input type="password" placeholder="Contraseña" required>
+            <input type="password" placeholder="Confirmar contraseña" required>
+            <button class="btn-action btn-primary">Crear cuenta</button>
+        </form>
+    </div>
+
+    <div class="overlay hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Mi Rincón de Baloncesto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo"> Baloncesto Total</div>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="Iniciar sesión.html">Iniciar sesión</a>
+            <a href="Registro">Registro</a>
+            <a href="Blog.html">Blog</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="portafolio.html">portafolio</a>
+            </nav>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Unete y Comparte tu Pasión</h2>
+            
+            <img 
+                src="https://img.freepik.com/vector-gratis/baloncesto-deporte-juego-paisaje-dibujos-animados_18591-51447.jpg?semt=ais_incoming&w=740&q=80" 
+                alt="Balón de baloncesto sobre la cancha" 
+                class="contact-image"
+                style="width: 100%; max-width: 800px; display: block; margin: 0 auto 2rem; border-radius: 8px; border: 3px solid var(--color-primary);"
+            >
+            <div class="form-container">
+                <p>
+                    Queremos construir la mejor comunidad de baloncesto. 
+                    Ingresa tus datos a continuación para registrarte y usando nuestra herramienta, 
+                    puedes gestionar tus entradas y validar nuestro sistema de registro
+                </p>
+                
+                <div class="input-group">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre">
+                    <div id="error-nombre" class="error"></div> 
+                </div>
+                <div class="input-group">
+                    <label for="email">Email de Contacto:</label>
+                    <input type="text" id="email">
+                    <div id="error-email" class="error"></div> 
+                </div>
+                <div class="input-group">
+                    <label for="edad">Años de Fanático:</label>
+                    <input type="number" id="edad" placeholder="¿Cuántos años llevas siguiendo el baloncesto?">
+                    <div id="error-edad" class="error"></div> 
+                </div>
+                
+                <div class="button-group">
+                    <button id="btnGuardar" class="btn-action btn-primary">Guardar Datos</button>
+                    <button id="btnVer" class="btn-action btn-primary-outline">Ver Datos Guardados</button>
+                    <button id="btnLimpiar" class="btn-action btn-secondary">Limpiar Formulario</button>
+                    <button id="btnBorrar" class="btn-action btn-danger">Borrar Todo</button>
+                </div>
+
+                <div id="resultado" class="data-result">
+                </div>
+            </div>
+            
+            <a href="index.html" class="back-to-top" style="display:block; text-align:center; margin-top:2rem;">Volver al Inicio ↑</a>
+        </section>
+        
+    </main>
+    
+    <div class="modal hidden">
+        <button class="btn-close">&times;</button> 
+        <h3>unete a la Comunidad Baloncesto!</h3>
+        <p>Regístrate para recibir las últimas noticias y análisis en tu correo</p>
+        <form>
+            <input type="text" placeholder="Tu Nombre">
+            <input type="email" placeholder="Tu Email">
+            <button type="submit" class="btn-action btn-primary">Suscribirme</button>
+        </form>
+    </div>
+    <div class="overlay hidden"></div> 
+
+    <script src="script.js"></script>
+</body>
+</html>

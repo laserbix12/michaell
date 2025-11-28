@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión | Baloncesto Total</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">Baloncesto Total</div>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="Iniciar sesión.html">Iniciar sesión</a>
+            <a href="Registro.html">Registro</a>
+            <a href="Blog.html">Blog</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="portafolio.html">Portafolio</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="iniciar-sesion" class="hero hero-background-image">
+            <div class="hero-content">
+                <h1>Iniciar sesión</h1>
+                <p>Accede a tu cuenta para continuar.</p>
+                <button class="btn-open btn-primary">Iniciar sesión</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal hidden">
+        <button class="btn-close">&times;</button>
+        <h3>Iniciar Sesión</h3>
+        <p>Introduce tus datos para acceder.</p>
+        
+        <form>
+            <input type="email" placeholder="Correo electrónico" required>
+            <input type="password" placeholder="Contraseña" required>
+
+            <!-- Términos -->
+            <div class="terms-bar">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">Acepto los <a href="#">Términos y Condiciones</a></label>
+            </div>
+
+            <button class="btn-action btn-primary">Entrar</button>
+        </form>
+    </div>
+
+    <div class="overlay hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

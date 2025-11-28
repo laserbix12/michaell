@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Rincón de Baloncesto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">Baloncesto Total</div>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="Iniciar sesión.html">Iniciar sesión</a>
+            <a href="Portafolio.html">Portafolio</a>
+             <a href="Registro.html">Registro</a>
+            <a href="Blog.html">Blog</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO PRINCIPAL -->
+        <section id="inicio" class="hero">
+            <h1>La Pasión Vive en la Cancha</h1>
+            <p>Descubre la historia, las reglas y el legado de uno de los deportes más emocionantes del mundo.</p>
+            <button class="btn-open">¡Suscríbete!</button>
+
+            <img src="https://vivemoviendote.com/wp-content/uploads/2025/02/imagen_2025-03-14_214742505-1-1024x640.webp" 
+                 alt="Jugador haciendo una clavada"
+                 class="small-img">
+        </section>
+
+        <!-- HISTORIA -->
+        <section class="info-section">
+            <h2>Historia del Baloncesto</h2>
+            <img src="https://images.unsplash.com/photo-1519861531473-9200262188bf" 
+                 alt="Balón de baloncesto en la cancha"
+                 class="small-img">
+            <p>
+                El baloncesto fue creado en 1891 por James Naismith como un deporte para el invierno. Hoy,
+                es uno de los deportes más populares alrededor del mundo.
+            </p>
+        </section>
+
+        <!-- REGLAS -->
+        <section class="info-section">
+            <h2>Reglas Básicas del Juego</h2>
+            <img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a"
+                 alt="Aro de baloncesto"
+                 class="small-img">
+
+            <ul>
+                <li>El juego se divide en 4 cuartos.</li>
+                <li>5 jugadores en cancha por cada equipo.</li>
+                <li>Tiros de 1, 2 o 3 puntos.</li>
+                <li>No se puede caminar sin botar el balón.</li>
+                <li>24 segundos por posesión.</li>
+            </ul>
+        </section>
+
+        <!-- ESTADÍSTICAS -->
+        <section class="info-section">
+            <h2>Estadísticas Más Importantes</h2>
+            <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d"
+                 alt="Partido profesional"
+                 class="small-img">
+
+            <ul>
+                <li><strong>Puntos:</strong> Total anotado.</li>
+                <li><strong>Asistencias:</strong> Pases que terminan en canasta.</li>
+                <li><strong>Rebotes:</strong> Balones recuperados.</li>
+                <li><strong>Robos:</strong> Balones arrebatados.</li>
+                <li><strong>Bloqueos:</strong> Tiros defendidos.</li>
+            </ul>
+        </section>
+
+        <!-- LEYENDAS -->
+        <section class="info-section">
+            <h2>Jugadores Legendarios</h2>
+            <img src="https://www.planetacb.com/wp-content/uploads/2024/10/Quienes-son-los-jugadores-legendarios-del-baloncesto-y-su-impacto-en-el-deporte-2.png"
+                 alt="Balón oscuro"
+                 class="small-img">
+
+            <ul>
+                <li><strong>Michael Jordan:</strong> Considerado el mejor de todos.</li>
+                <li><strong>LeBron James:</strong> Dominante por más de 20 años.</li>
+                <li><strong>Kobe Bryant:</strong> La Mamba Negra.</li>
+                <li><strong>Stephen Curry:</strong> Revolucionó el tiro de 3.</li>
+                <li><strong>Shaquille O’Neal:</strong> Un pívot imparable.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- MODAL -->
+    <div class="modal hidden">
+        <button class="btn-close">&times;</button>
+        <h3>¡Únete a la Comunidad Baloncesto!</h3>
+        <p>Recibe noticias, estadísticas y análisis directamente en tu correo.</p>
+
+        <form>
+            <input type="text" placeholder="Tu Nombre">
+            <input type="email" placeholder="Tu Email">
+            <button type="submit" class="btn-action">Suscribirme</button>
+        </form>
+    </div>
+
+    <div class="overlay hidden"></div>
+
+    <!-- FOOTER NARANJA -->
+    <footer class="footer">
+        <p>© 2025 Baloncesto Total | Todos los derechos reservados</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
