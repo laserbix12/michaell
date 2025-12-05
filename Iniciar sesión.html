@@ -33,12 +33,14 @@
     <!-- Modal -->
     <div class="modal hidden">
         <button class="btn-close">&times;</button>
+
         <h3>Iniciar Sesión</h3>
         <p>Introduce tus datos para acceder.</p>
         
-        <form>
-            <input type="email" placeholder="Correo electrónico" required>
-            <input type="password" placeholder="Contraseña" required>
+        <!-- AQUÍ VA EL FORMULARIO CORRECTO -->
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
 
             <!-- Términos -->
             <div class="terms-bar">
@@ -46,7 +48,7 @@
                 <label for="terms">Acepto los <a href="#">Términos y Condiciones</a></label>
             </div>
 
-            <button class="btn-action btn-primary">Entrar</button>
+            <button type="submit" class="btn-action btn-primary">Entrar</button>
         </form>
     </div>
 
