@@ -3,8 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión | Baloncesto Total</title>
+    <title>Acceso | Baloncesto Total</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Estilos base (Manteniendo la estructura que ya tenías) */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Estilos específicos para la vista de autenticación */
+        .auth-view {
+            display: none; /* Por defecto, ocultar ambas vistas */
+            text-align: left; /* Alineación para formularios */
+            padding: 0 1rem;
+        }
+        
+        /* La vista que se está mostrando actualmente */
+        .auth-view.active {
+            display: block;
+        }
+
+        /* Estilos para el texto de cambio de vista */
+        .switch-option {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        .switch-link {
+            cursor: pointer;
+            color: var(--color-primary); /* Naranja */
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        
+        /* Asegurando que la modal no esté centrada en el texto si no tiene título/párrafo */
+        .modal h3, .modal p {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -13,7 +53,7 @@
         <nav class="nav">
             <a href="index.html">Inicio</a>
             <a href="Iniciar sesión.html">Iniciar sesión</a>
-            <a href="Registro.html">Registro</a>
+    
             <a href="Blog.html">Blog</a>
             <a href="contacto.html">Contacto</a>
             <a href="portafolio.html">Portafolio</a>
@@ -23,33 +63,64 @@
     <main>
         <section id="iniciar-sesion" class="hero hero-background-image">
             <div class="hero-content">
-                <h1>Iniciar sesión</h1>
-                <p>Accede a tu cuenta para continuar.</p>
-                <button class="btn-open btn-primary">Iniciar sesión</button>
+                <h1>Acceso de Usuario</h1>
+                <p>Inicia sesión o regístrate en un solo lugar.</p>
+                <div class="button-group">
+                    <button id="openAuthModal" data-view="login" class="btn-action btn-primary">Iniciar sesión</button>
+                    <button id="openAuthModal2" data-view="register" class="btn-action btn-secondary">Registro</button>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Modal -->
-    <div class="modal hidden">
-        <button class="btn-close">&times;</button>
+    <div id="authModal" class="modal hidden">
+        <button class="btn-close auth-close">&times;</button>
 
-        <h3>Iniciar Sesión</h3>
-        <p>Introduce tus datos para acceder.</p>
-        
-        <!-- AQUÍ VA EL FORMULARIO CORRECTO -->
-        <form id="loginForm">
-            <input type="email" id="email" placeholder="Correo electrónico" required>
-            <input type="password" id="password" placeholder="Contraseña" required>
+        <div id="loginView" class="auth-view active">
+            <h3>Iniciar Sesión</h3>
+            <p>Introduce tus datos para acceder.</p>
+            
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
+                <input type="password" id="loginPassword" placeholder="Contraseña" required>
 
-            <!-- Términos -->
-            <div class="terms-bar">
-                <input type="checkbox" id="terms" required>
-                <label for="terms">Acepto los <a href="#">Términos y Condiciones</a></label>
+                <div class="terms-bar">
+                    <input type="checkbox" id="loginTerms" required>
+                    <label for="loginTerms">Recordar sesión</label>
+                </div>
+
+                <button type="submit" class="btn-action btn-primary" style="margin-top: 10px; width: 100%;">Entrar</button>
+            </form>
+            
+            <div class="switch-option">
+                ¿No tienes cuenta? 
+                <span id="switchToRegister" class="switch-link">Regístrate aquí</span>
             </div>
+        </div>
 
-            <button type="submit" class="btn-action btn-primary">Entrar</button>
-        </form>
+        <div id="registerView" class="auth-view">
+            <h3>Registro</h3>
+            <p>Completa los campos para crear tu cuenta.</p>
+            
+            <form id="registerForm">
+                <input type="text" id="regName" placeholder="Nombre completo" required>
+                <input type="email" id="regEmail" placeholder="Correo electrónico" required>
+                <input type="password" id="regPassword" placeholder="Contraseña" required>
+                <input type="password" id="regConfirmPassword" placeholder="Confirmar contraseña" required>
+                
+                <div class="terms-bar">
+                    <input type="checkbox" id="regTerms" required>
+                    <label for="regTerms">Acepto los <a href="#">Términos y Condiciones</a></label>
+                </div>
+
+                <button type="submit" class="btn-action btn-secondary" style="margin-top: 10px; width: 100%;">Crear Cuenta</button>
+            </form>
+            
+            <div class="switch-option">
+                ¿Ya tienes cuenta? 
+                <span id="switchToLogin" class="switch-link">Inicia sesión</span>
+            </div>
+        </div>
     </div>
 
     <div class="overlay hidden"></div>
