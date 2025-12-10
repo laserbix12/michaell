@@ -743,3 +743,152 @@ body {
     border-color: #ff8c42;
     color: white;
 }
+/* Definición de la variable principal (Asegúrate de que esté al inicio de tus estilos) */
+:root {
+    --color-primary: #ff5c00; 
+    --color-text-dark: #333; /* Gris oscuro para el texto principal */
+    --color-text-light: #666; /* Gris más claro para texto secundario */
+}
+
+/* -------------------------------------- */
+/* ESTILOS GENERALES DE LA MODAL */
+/* -------------------------------------- */
+.modal {
+    background-color: #fff; /* Fondo blanco para la modal */
+    color: var(--color-text-dark); 
+    border-radius: 8px; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    padding: 20px; /* Asegura un buen espacio interno */
+    max-width: 400px;
+    width: 90%;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+}
+
+/* Botón de cierre (X) */
+.auth-close {
+    color: #999; /* Gris oscuro */
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+.auth-close:hover {
+    color: var(--color-primary); /* Naranja al pasar el ratón */
+}
+
+/* -------------------------------------- */
+/* ESTILOS DE PESTAÑAS (Tabs) */
+/* -------------------------------------- */
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px; 
+    border-bottom: 1px solid #ddd; /* Línea divisoria gris muy suave */
+}
+
+.auth-tab-item {
+    flex: 1; 
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--color-text-light); /* Texto gris para las pestañas inactivas */
+    border-bottom: 3px solid transparent;
+    transition: border-bottom 0.2s ease, color 0.2s ease;
+}
+
+/* Estado Activo: Texto y línea naranja */
+.auth-tab-item.active {
+    color: var(--color-primary); /* Texto naranja */
+    border-bottom: 3px solid var(--color-primary); /* Línea naranja */
+}
+
+/* -------------------------------------- */
+/* ESTILOS DE CONTENIDO Y FORMULARIO */
+/* -------------------------------------- */
+
+/* Título Grande de la Modal */
+.auth-view h3 {
+    text-align: center;
+    color: var(--color-primary); /* Título Principal en naranja */
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Inputs del Formulario */
+input[type="email"], 
+input[type="password"],
+input[type="text"],
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Borde gris */
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: var(--color-text-dark);
+}
+input::placeholder {
+    color: #aaa; /* Placeholder gris claro */
+}
+
+/* -------------------------------------- */
+/* BOTONES */
+/* -------------------------------------- */
+.btn-action {
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+/* Botón Primario (ENTRAR) */
+.btn-action.btn-primary {
+    background-color: var(--color-primary); /* Fondo naranja */
+    color: white; /* Letras blancas */
+    box-shadow: 0 4px 6px rgba(255, 92, 0, 0.3);
+}
+.btn-action.btn-primary:hover {
+    background-color: #cc4a00; /* Naranja más oscuro al pasar el ratón */
+}
+
+/* Botones Secundarios (Opcional si los usas) */
+.btn-action.btn-secondary {
+    background-color: #fff;
+    color: var(--color-primary); /* Letras naranjas */
+    border: 2px solid var(--color-primary); /* Borde naranja */
+}
+.btn-action.btn-secondary:hover {
+    background-color: #fff3e6; /* Fondo blanco muy ligero */
+}
+
+/* -------------------------------------- */
+/* ENLACES Y TEXTO SECUNDARIO */
+/* -------------------------------------- */
+
+/* Texto "¿No tienes cuenta? Regístrate aquí" */
+.switch-option {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--color-text-light); /* Texto gris */
+}
+
+/* El enlace para alternar */
+.switch-link {
+    color: var(--color-primary); /* Enlace naranja */
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none; /* Quita el subrayado si es un span */
+}
+.switch-link:hover {
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+}
