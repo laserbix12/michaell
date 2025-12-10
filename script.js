@@ -565,3 +565,106 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Nota: Aquí iría la lógica de envío de formularios (loginForm, registerForm)
 });
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Elementos de la Modal
+    const authModal = document.getElementById('authModal');
+    const overlay = document.querySelector('.overlay');
+    
+    // Botones de Apertura (Ambos en la página principal)
+    const openAuthModalBtnLogin = document.getElementById('openAuthModal');
+    const openAuthModalBtnRegister = document.getElementById('openAuthModal2');
+    const closeBtn = authModal.querySelector('.auth-close');
+
+    // 2. Elementos de las Pestañas
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const loginView = document.getElementById('loginView');
+    const registerView = document.getElementById('registerView');
+
+    // Enlaces de cambio rápido entre formularios
+    const switchToRegisterLink = document.getElementById('switchToRegister');
+    const switchToLoginLink = document.getElementById('switchToLogin');
+    
+    // Función central para cambiar la pestaña y la vista
+    function switchTab(clickedTab, targetView) {
+        // Remover 'active' de todas las pestañas y vistas
+        tabLogin.classList.remove('active');
+        tabRegister.classList.remove('active');
+        loginView.classList.remove('active');
+        registerView.classList.remove('active');
+
+        // Agregar 'active' a la pestaña y vista seleccionadas
+        clickedTab.classList.add('active');
+        targetView.classList.add('active');
+    }
+
+    // Función para abrir la modal
+    function openModal(initialTab = 'login') {
+        authModal.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+        
+        // Determina qué pestaña debe estar activa al abrir
+        if (initialTab === 'register') {
+             switchTab(tabRegister, registerView);
+        } else {
+             switchTab(tabLogin, loginView);
+        }
+    }
+
+    // Función para cerrar la modal
+    function closeModal() {
+        authModal.classList.add('hidden');
+        overlay.classList.add('hidden');
+    }
+
+    // --- MANEJO DE EVENTOS ---
+    
+    // ABRIR MODAL: BOTÓN "Iniciar sesión"
+    if (openAuthModalBtnLogin) {
+        openAuthModalBtnLogin.addEventListener('click', () => openModal('login'));
+    }
+
+    // ABRIR MODAL: BOTÓN "Registro"
+    if (openAuthModalBtnRegister) {
+        openAuthModalBtnRegister.addEventListener('click', () => openModal('register'));
+    }
+
+
+    // CERRAR MODAL
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !authModal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+
+    // CAMBIO DE PESTAÑAS (TABS)
+    if (tabLogin && loginView) {
+        tabLogin.addEventListener('click', () => switchTab(tabLogin, loginView));
+    }
+    if (tabRegister && registerView) {
+        tabRegister.addEventListener('click', () => switchTab(tabRegister, registerView));
+    }
+
+    // CAMBIO DE ENLACES (DENTRO DEL FORMULARIO)
+    if (switchToRegisterLink) {
+        switchToRegisterLink.addEventListener('click', () => switchTab(tabRegister, registerView));
+    }
+    if (switchToLoginLink) {
+        switchToLoginLink.addEventListener('click', () => switchTab(tabLogin, loginView));
+    }
+    
+    // MANEJO DEL OJO (Toggle Password Visibility)
+    const togglePasswords = authModal ? authModal.querySelectorAll('.toggle-password') : [];
+    togglePasswords.forEach(icon => {
+        icon.addEventListener('click', () => {
+            const passwordInput = icon.previousElementSibling;
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            // Cambia el ícono del ojo
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    });
+});
