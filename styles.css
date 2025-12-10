@@ -2,13 +2,13 @@
 /* 🏀 1. VARIABLES Y ESTILOS BASE */
 /* ========================================================== */
 :root {
-    --color-primary: #ff5c00; /* Naranja Principal (Baloncesto Total) - Usamos el color original de las mejoras */
+    --color-primary: #ff5c00; /* Naranja Principal (Baloncesto Total) */
     --color-secondary: #000000; /* Negro */
     --color-text-dark: #333333; /* Texto principal oscuro */
-    --color-text-light: #5f5f5f; /* Texto secundario, íconos y placeholders */
+    --color-text-light: #5f5f5f; /* Texto secundario */
     --color-background: #f4f4f9; /* Fondo muy suave */
     --color-light: #ffffff;
-    --color-border-input: #dcdcdc; /* Borde de input más definido */
+    --color-border-input: #dcdcdc; /* Borde de input */
     --font-heading: 'Helvetica Neue', Arial, sans-serif; 
     --color-danger: #cc0000; /* Para errores */
     --color-gray-soft: #ededed; /* Gris claro para secciones */
@@ -27,7 +27,6 @@ body {
     background-color: var(--color-background);
 }
 
-/* Regla general para que todas las imágenes sean responsivas y no rompan el layout */
 img {
     max-width: 100%; 
     height: auto;    
@@ -77,46 +76,31 @@ img {
 .btn-action,
 .btn-open,
 .btn-primary,
-.btn-primary-outline,
-.btn-secondary,
-.btn-danger {
+.btn-primary-outline {
     border: none;
     padding: 1rem 2rem;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
     border-radius: 6px; 
-    transition: background-color 0.2s, transform 0.1s, border-color 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
     text-transform: uppercase;
 }
 
-.btn-primary { 
+.btn-primary, .btn-open { /* Alias para el mismo estilo principal */
     background-color: var(--color-primary);
     color: var(--color-light);
     border: 1px solid var(--color-primary);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-open:hover {
     background-color: #e64a00;
     border-color: #e64a00;
     transform: translateY(-2px); 
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.btn-primary-outline { 
-    background-color: transparent;
-    border: 2px solid var(--color-primary);
-    color: var(--color-primary);
-    box-shadow: none;
-}
-
-.btn-primary-outline:hover {
-    background-color: var(--color-primary);
-    color: var(--color-light);
-}
-
-/* Botón de cierre de modal (Icono de X) */
 .btn-close {
     position: absolute;
     top: 15px;
@@ -135,7 +119,7 @@ img {
 }
 
 /* ========================================================== */
-/* 🏀 4. LAYOUT GENERAL Y TÍTULOS */
+/* 🏀 4. LAYOUT GENERAL Y HERO */
 /* ========================================================== */
 main {
     padding-bottom: 4rem;
@@ -147,10 +131,6 @@ main {
     margin: 0 auto;
 }
 
-.section-gray {
-    background-color: var(--color-gray-soft);
-}
-
 h2 {
     font-family: var(--font-heading);
     font-size: 2.5rem;
@@ -160,15 +140,15 @@ h2 {
     border-bottom: 3px solid var(--color-primary);
     display: inline-block;
     padding-bottom: 5px;
-    width: auto;
-    display: block; /* Centrar el bloque */
+    display: block; 
     margin-left: auto;
     margin-right: auto;
+    width: fit-content;
 }
 
 /* --- HERO SECTION (Portada) --- */
-.hero-background-image {
-    /* Usamos una imagen de fondo con degradado oscuro para que el texto resalte */
+/* Esta clase se usará en la nueva estructura HTML del index para la imagen de fondo */
+.hero-background-image { 
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
                  url('https://images.unsplash.com/photo-1546519638-68e109498257') no-repeat center center/cover;
     min-height: 60vh;
@@ -181,7 +161,7 @@ h2 {
     padding: 0 5%;
 }
 
-.hero-content h1 {
+.hero-background-image h1 {
     font-family: var(--font-heading);
     font-size: 4rem;
     color: var(--color-primary);
@@ -190,114 +170,75 @@ h2 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.hero-content p {
+.hero-background-image p {
     font-size: 1.4rem;
     margin-bottom: 2.5rem;
     max-width: 700px;
 }
 
-.button-group {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
-/* ========================================================== */
-/* 🏀 5. ESTILOS DE PORTAFOLIO/BLOG (TARJETAS) */
-/* ========================================================== */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 30px;
-}
-
-.blog-post { /* Tarjeta de proyecto/post */
-    background-color: var(--color-light);
+/* --- SECCIONES DE INFO (Historia, Reglas, etc.) --- */
+.info-section {
+    background: var(--color-light);
+    margin: 30px auto;
+    padding: 30px;
+    max-width: 750px;
     border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    text-align: center; /* Centrar todo el contenido de la sección */
 }
 
-.blog-post:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+.info-section p {
+    font-size: 1.1rem;
+    margin-top: 15px;
+    color: var(--color-text-dark);
 }
 
-.project-image {
-    /* Contenedor de la imagen para asegurar uniformidad en Portafolio */
-    width: 100%;
-    height: 220px;
+/* Estilo para las imágenes pequeñas y centradas dentro de las secciones */
+.small-img {
+    width: 280px;
+    max-width: 90%;
+    display: block;
+    margin: 20px auto; 
+    border-radius: 10px;
     object-fit: cover;
-    border-bottom: 3px solid var(--color-primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border: 3px solid var(--color-primary);
 }
 
-/* Imagen para posts de blog individuales (más alta) */
-.blog-post > img:not(.project-image) {
-    max-height: 400px;
-    margin-bottom: 1.5rem;
-}
-
-.blog-post h3 {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    padding: 15px 20px 5px 20px;
-    color: var(--color-secondary);
-}
-
-.blog-post .post-meta {
-    font-size: 0.9rem;
-    color: var(--color-primary);
-    font-weight: 600;
-    padding: 0 20px 10px 20px;
-}
-
-.blog-post p {
-    padding: 0 20px 20px 20px;
-    font-size: 1rem;
-}
-
-/* Estilos de Lista */
-.blog-post ul {
+/* Estilo de lista con ícono de baloncesto */
+.info-section ul {
     list-style: none;
-    padding: 0 20px 20px 40px; /* Ajuste para el ícono */
+    padding: 0;
+    text-align: left; /* Alinear texto de la lista a la izquierda */
+    max-width: 500px;
+    margin: 20px auto;
 }
 
-.blog-post ul li {
-    padding-left: 1.5rem;
+.info-section ul li {
+    padding-left: 1.8rem;
     position: relative;
-    margin-bottom: 0.5rem;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
 }
 
-.blog-post ul li::before {
+.info-section ul li::before {
     content: "🏀"; 
     position: absolute;
     left: 0;
     color: var(--color-primary);
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 /* ========================================================== */
-/* 🏀 6. MODAL Y FORMULARIO (Autenticación) */
+/* 🏀 5. MODAL (Suscripción/Login) */
 /* ========================================================== */
-.input-group input:focus,
-.modal input:focus {
-    border: 2px solid var(--color-primary) !important;
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 92, 0, 0.3);
-    transition: 0.2s;
-}
-
-/* Otros estilos de la Modal (Simplificados y limpios) */
 .hidden { display: none !important; }
 
 .overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 100;
 }
 
@@ -306,49 +247,45 @@ h2 {
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 450px; 
+    max-width: 400px; 
     background-color: var(--color-light);
-    padding: 0 0 35px 0; 
+    padding: 2rem; 
     border-radius: 12px;
     z-index: 200;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--color-primary);
 }
 
-/* Se asume que los estilos detallados de pestañas e inputs de la modal
-   (como los .auth-tabs, .auth-view, .input-icon-group, etc.) 
-   se añadirían aquí si los necesitáramos para la modal avanzada. 
-   Por ahora, usamos los inputs generales: */
+.modal h3 {
+    font-family: var(--font-heading);
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+.modal p {
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+}
+
 .modal input {
-    padding: 15px 15px; 
+    padding: 12px 15px; 
     border: 1px solid var(--color-border-input);
-    border-radius: 8px; 
+    border-radius: 6px; 
     font-size: 1rem;
     margin-bottom: 15px;
     width: 100%;
 }
 
-/* Barra de términos (ejemplo) */
-.terms-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 15px 0;
-    font-size: 14px;
-    color: var(--color-text-dark);
-}
-.terms-bar a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 600;
-}
-.terms-bar input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--color-primary);
+.modal input:focus {
+    border: 2px solid var(--color-primary) !important;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 92, 0, 0.3);
+    transition: 0.2s;
 }
 
 /* ========================================================== */
-/* 🏀 7. FOOTER */
+/* 🏀 6. FOOTER */
 /* ========================================================== */
 .footer {
     background-color: var(--color-secondary);
