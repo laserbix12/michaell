@@ -2,14 +2,13 @@
 /* 🏀 1. VARIABLES Y ESTILOS BASE */
 /* ========================================================== */
 :root {
-    --color-primary: #ff5c00; /* Naranja Principal (Baloncesto Total) */
-    --color-secondary: #000000; /* Negro */
-    --color-text-dark: #333333; /* Texto principal oscuro */
-    --color-text-light: #5f5f5f; /* Texto secundario, íconos y placeholders */
-    --color-background: #f4f4f9; /* Fondo muy suave */
+    --color-primary: #FF5722; /* Naranja (Baloncesto) */
+    --color-secondary: #000000;
+    --color-text: #333333;
+    --color-background: #f4f4f9;
     --color-light: #ffffff;
-    --color-border-input: #dcdcdc; /* Borde de input más definido */
-    --font-heading: 'Helvetica Neue', Arial, sans-serif; 
+    --color-danger: #0a0a0a;
+    --color-gray: #ededed;
 }
 
 * {
@@ -21,7 +20,7 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: var(--color-text-dark);
+    color: var(--color-text);
     background-color: var(--color-background);
 }
 
@@ -37,24 +36,23 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 4px solid var(--color-primary);
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid var(--color-primary); /* Borde simple */
 }
 
 .logo {
-    font-family: var(--font-heading);
-    font-size: 1.9rem;
-    font-weight: 800;
+    font-size: 1.8rem;
+    font-weight: bold;
     color: var(--color-primary);
 }
 
 .nav a {
     color: var(--color-light);
     text-decoration: none;
-    margin-left: 1.5rem;
+    margin-left: 1.2rem;
     font-weight: 500;
-    font-size: 1rem;
-    padding: 0.5rem 0;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    /* Transición simple de color */
     transition: color 0.2s;
 }
 
@@ -63,98 +61,292 @@ body {
 }
 
 /* ========================================================== */
-/* 🏀 3. BOTONES Y ACCIONES GENERALES */
+/* 🏀 3. BOTONES Y ACCIONES */
 /* ========================================================== */
-.btn-action {
+.btn-action,
+.btn-open {
     border: none;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.5rem;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
-    border-radius: 6px; /* Bordes sutiles */
-    transition: background-color 0.2s, transform 0.1s;
+    border-radius: 5px; /* Bordes cuadrados, más sencillos */
+    transition: background-color 0.2s; /* Transición simple de fondo */
     text-transform: uppercase;
 }
 
 .btn-primary { 
     background-color: var(--color-primary);
     color: var(--color-light);
-    border: 1px solid var(--color-primary);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Sombra suave para levantar el botón */
 }
 
 .btn-primary:hover {
-    background-color: #e64a00;
-    border-color: #e64a00;
-    transform: translateY(-2px); /* Efecto 3D sutil */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background-color: #e64a19;
 }
 
-/* Botón de cierre de modal (Icono de X) */
-.btn-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.5rem; 
-    color: var(--color-text-light);
-    cursor: pointer;
-    transition: color 0.2s, transform 0.2s;
-    padding: 5px;
-}
-.btn-close:hover {
+.btn-primary-outline { 
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
     color: var(--color-primary);
-    transform: rotate(90deg); /* Animación de cierre */
+}
+
+.btn-primary-outline:hover {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+}
+
+.btn-secondary { 
+    background-color: #607d8b;
+    color: var(--color-light);
+}
+
+.btn-secondary:hover {
+    background-color: #455a64;
+}
+
+.btn-danger { 
+    background-color: var(--color-danger);
+    color: var(--color-light);
+}
+
+.btn-danger:hover {
+    background-color: #181716;
 }
 
 /* ========================================================== */
-/* 🏀 4. SECCIÓN HERO */
+/* 🏀 4. SECCIONES Y CONTENIDO */
 /* ========================================================== */
+main {
+    padding-bottom: 4rem;
+}
+
+.content-section {
+    padding: 4rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-gray {
+    background-color: var(--color-gray);
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+}
+
+/* SECCIÓN HEROE (Imagen de fondo para el baloncesto) */
 .hero-background-image {
-    background-color: var(--color-background);
-    padding: 120px 5%; /* Más espacio */
+    /* *** Configuración de la Imagen de Fondo *** */
+    /* Mismo fondo, pero sin los efectos de sombra */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('https://images.unsplash.com/photo-1546519638-68e109498257') no-repeat center center/cover;
+    height: 60vh; /* Altura más sencilla */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: var(--color-light);
     text-align: center;
-    min-height: 50vh; 
 }
 
-.hero-content h1 {
-    font-family: var(--font-heading);
-    font-size: 3.5rem;
+.hero-content {
+    max-width: 900px;
+}
+
+.hero h1 {
+    font-size: 4rem;
     color: var(--color-primary);
-    margin-bottom: 0.75rem;
-    font-weight: 900;
+    margin-bottom: 1rem;
 }
 
-.hero-content p {
-    font-size: 1.25rem;
-    color: var(--color-text-dark);
-    margin-bottom: 2.5rem;
+.hero p {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+/* ESTILOS DEL BLOG */
+.blog-post {
+    background-color: var(--color-light);
+    padding: 2rem;
+    border-radius: 8px; /* Bordes más sutiles */
+    border: 1px solid #ddd; /* Borde simple */
+}
+
+.blog-post h3 {
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.post-meta {
+    font-style: italic;
+    color: #777;
+    margin-bottom: 1.5rem;
+}
+
+.blog-post img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.blog-post ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1.5rem;
+}
+
+.blog-post ul li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.blog-post ul li::before {
+    content: "🏀"; 
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-size: 0.8rem;
+}
+
+
+/* ========================================================== */
+/* 🏀 5. FORMULARIO Y LOCALSTORAGE */
+/* ========================================================== */
+.form-container {
+    background-color: var(--color-light);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-description {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.error {
+    color: var(--color-danger);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
 }
 
 .button-group {
     display: flex;
-    gap: 20px;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
-/* 🏀 4.1. IMÁGENES RESPONSIVAS */
-/* Regla general para que todas las imágenes sean responsivas y no rompan el layout */
-img {
-    max-width: 100%; /* Asegura que la imagen nunca exceda el ancho de su contenedor */
-    height: auto;    /* Mantiene la proporción de la imagen para que no se distorsione */
-    display: block;  /* Ayuda a controlar el espaciado si la imagen es un elemento de bloque */
+/* RESULTADOS LOCALSTORAGE */
+.data-result {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 2px dashed var(--color-primary);
+    border-radius: 6px;
+    background-color: #fff8e1;
+    display: none;
+}
+
+.usuario {
+    background-color: var(--color-light);
+    padding: 0.8rem;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 4px;
+    margin-bottom: 0.8rem;
+}
+
+.btn-borrar-individual {
+    background-color: var(--color-danger);
+    color: var(--color-light);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
 }
 
 /* ========================================================== */
-/* 🏀 5. MODAL DE AUTENTICACIÓN */
+/* 🏀 6. MODAL Y OVERLAY */
 /* ========================================================== */
 .hidden {
     display: none !important;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    background-color: var(--color-light);
+    padding: 2rem;
+    border-radius: 10px;
+    z-index: 200;
+    text-align: center;
+    border: 3px solid var(--color-primary);
+}
+
+.modal h3 {
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.modal input {
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.btn-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: #aaa;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.btn-close:hover {
+    color: var(--color-danger);
 }
 
 .overlay {
@@ -163,170 +355,332 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5); /* Oscurecimiento simple */
     z-index: 100;
 }
+/* Inputs color naranja al escribir */
+input:focus {
+    border: 2px solid #ff7b00 !important;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 123, 0, 0.5);
+    transition: 0.2s;
+}
 
+/* Barra de términos */
+.terms-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+    font-size: 14px;
+}
+
+.terms-bar a {
+    color: #ff7b00;
+    text-decoration: none;
+}
+
+.terms-bar a:hover {
+    text-decoration: underline;
+}
+
+/* Checkbox pequeño */
+.terms-bar input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+/* Cuando lo seleccionan */
+.terms-bar input[type="checkbox"]:checked {
+    accent-color: #ff7b00; /* color naranja */
+}
+.small-img {
+    width: 280px;          /* Tamaño controlado */
+    max-width: 80%;        /* Para móviles */
+    display: block;
+    margin: 15px auto;     /* Centrada */
+    border-radius: 15px;   /* Bordes redondeados */
+    object-fit: cover;     /* Evita deformaciones */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Sombra */
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f2f2f2;
+}
+
+/* HEADER */
+.header {
+    background: #1a1a1a;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav a:hover {
+    color: #ff9800;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 40px;
+    background: white;
+}
+
+.small-img {
+    width: 250px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* SECCIONES */
+.info-section {
+    background: white;
+    margin: 20px auto;
+    padding: 25px;
+    max-width: 700px;
+    border-radius: 10px;
+}
+
+.info-section h2 {
+    text-align: center;
+}
+
+.info-section ul {
+    padding-left: 20px;
+}
+
+/* MODAL */
 .modal {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 450px; 
-    background-color: var(--color-light);
-    padding: 0 0 35px 0; 
-    border-radius: 12px;
-    z-index: 200;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25); 
-    display: flex; 
-    flex-direction: column;
-}
-
-/* --- PESTAÑAS (TABS) --- */
-.auth-tabs {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    border-bottom: 1px solid var(--color-border-input);
-    margin-bottom: 30px; 
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-right: 50px; 
-}
-
-.auth-tab-item {
-    flex: 1; 
-    text-align: center;
-    padding: 15px 0;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--color-text-light); 
-    border-bottom: 3px solid transparent;
-    transition: border-bottom 0.3s ease, color 0.3s ease;
-}
-
-.auth-tab-item.active {
-    color: var(--color-primary); 
-    border-bottom: 3px solid var(--color-primary); 
-}
-
-/* --- VISTAS Y TÍTULOS --- */
-.auth-content {
-    padding: 0 30px; 
-}
-
-.auth-view {
-    display: none; 
-}
-.auth-view.active {
-    display: block; 
-}
-
-.auth-view h3 {
-    font-family: var(--font-heading);
-    text-align: center;
-    color: var(--color-primary); 
-    margin-top: 0;
-    margin-bottom: 30px;
-    font-size: 2.5rem; 
-    font-weight: 700;
-}
-
-/* --- INPUTS Y FORMULARIO --- */
-.input-icon-group {
-    position: relative;
-    margin-bottom: 20px; 
-}
-
-.input-icon-group .icon,
-.password-group .toggle-password {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.1rem; 
-    color: var(--color-text-light); 
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
     z-index: 10;
 }
 
-.input-icon-group .icon {
-    left: 15px;
+.hidden {
+    display: none;
 }
 
-.password-group .toggle-password {
-    right: 15px;
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 5;
+}
+
+.btn-action, .btn-open {
+    background: #ff9800;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-input[type="text"], 
-input[type="email"], 
-input[type="password"],
-select {
-    width: 100%;
-    padding: 15px 15px 15px 45px; 
-    border: 1px solid var(--color-border-input);
-    border-radius: 8px; 
-    box-sizing: border-box;
-    font-size: 1rem;
-    color: var(--color-text-dark);
-    background-color: var(--color-light);
-    transition: border-color 0.2s;
-}
-
-/* Inputs de Registro sin íconos */
-#registerView input[type="text"], 
-#registerView input[type="email"], 
-#registerView input[type="password"] {
-    padding-left: 15px; 
-    margin-bottom: 20px;
-}
-
-/* Foco: borde naranja grueso */
-input:focus,
-select:focus {
-    border: 2px solid var(--color-primary) !important;
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 92, 0, 0.3); 
-}
-
-/* Estilo para el botón ENTRAR y CREAR CUENTA */
-.auth-content .btn-primary {
-    width: 100%;
-    padding: 16px 0; 
-    font-size: 1.1rem;
-    margin-top: 30px; 
-}
-
-/* --- ENLACES Y TÉRMINOS --- */
-.switch-option {
-    text-align: center;
-    margin-top: 25px;
-    font-size: 0.95rem;
-    color: var(--color-text-dark);
-}
-
-.switch-link {
-    color: var(--color-primary); 
-    font-weight: 700;
-    text-decoration: none;
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    float: right;
     cursor: pointer;
 }
-.switch-link:hover {
-    text-decoration: underline;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f3f3f3;
 }
 
-.terms-bar {
+/* ----- HEADER ----- */
+.header {
+    background: #1a1a1a;
+    color: white;
+    padding: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    margin: 15px 0;
-    font-size: 14px;
-    color: var(--color-text-dark);
 }
-.terms-bar input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
+
+.nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav a:hover {
+    color: #ff9800;
+}
+
+/* ----- HERO ----- */
+.hero {
+    text-align: center;
+    padding: 40px;
+    background: white;
+}
+
+.small-img {
+    width: 230px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+/* ----- SECCIONES ----- */
+.info-section {
+    background: white;
+    margin: 20px auto;
+    padding: 25px;
+    max-width: 750px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.info-section h2 {
+    text-align: center;
+}
+
+.info-section ul {
+    padding-left: 20px;
+}
+
+/* ----- MODAL ----- */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 5;
+}
+
+.btn-action, .btn-open {
+    background: #ff9800;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
-    accent-color: var(--color-primary);
 }
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    float: right;
+    cursor: pointer;
+}
+
+/* ----- FOOTER NARANJA ----- */
+.footer {
+    background: #ff9800;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
+    font-weight: bold;
+}
+.dashboard-container {
+  width: 90%;
+  margin: 40px auto;
+  color: rgb(24, 23, 23);
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-title {
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 30px;
+  color: #ff6a00;
+  text-shadow: 0 0 10px rgba(255,100,0,0.6);
+}
+
+/* GRID DE TARJETAS */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+/* TARJETAS */
+.stat-card {
+  background: #201f1e;
+  padding: 25px;
+  border-radius: 15px;
+  border: 2px solid #ff6a00;
+  text-align: center;
+  box-shadow: 0 0 18px rgba(255,100,0,0.25);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255,100,0,0.5);
+}
+
+.stat-icon {
+  font-size: 45px;
+  margin-bottom: 15px;
+}
+
+.stat-card h3 {
+  font-size: 20px;
+  color: #ff6a00;
+  margin-bottom: 10px;
+}
+
+.stat-card p {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* GRAFICO */
+.chart-box {
+  background: #111;
+  padding: 20px;
+  border: 2px solid #ff6a00;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255,100,0,0.3);
+}
+
