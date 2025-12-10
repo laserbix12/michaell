@@ -2,13 +2,16 @@
 /* 🏀 1. VARIABLES Y ESTILOS BASE */
 /* ========================================================== */
 :root {
-    --color-primary: #FF5722; /* Naranja (Baloncesto) */
-    --color-secondary: #000000;
-    --color-text: #333333;
-    --color-background: #f4f4f9;
+    --color-primary: #ff5c00; /* Naranja Principal (Baloncesto Total) - Usamos el color original de las mejoras */
+    --color-secondary: #000000; /* Negro */
+    --color-text-dark: #333333; /* Texto principal oscuro */
+    --color-text-light: #5f5f5f; /* Texto secundario, íconos y placeholders */
+    --color-background: #f4f4f9; /* Fondo muy suave */
     --color-light: #ffffff;
-    --color-danger: #0a0a0a;
-    --color-gray: #ededed;
+    --color-border-input: #dcdcdc; /* Borde de input más definido */
+    --font-heading: 'Helvetica Neue', Arial, sans-serif; 
+    --color-danger: #cc0000; /* Para errores */
+    --color-gray-soft: #ededed; /* Gris claro para secciones */
 }
 
 * {
@@ -20,8 +23,15 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: var(--color-text);
+    color: var(--color-text-dark);
     background-color: var(--color-background);
+}
+
+/* Regla general para que todas las imágenes sean responsivas y no rompan el layout */
+img {
+    max-width: 100%; 
+    height: auto;    
+    display: block;  
 }
 
 /* ========================================================== */
@@ -36,23 +46,24 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 3px solid var(--color-primary); /* Borde simple */
+    border-bottom: 4px solid var(--color-primary);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-family: var(--font-heading);
+    font-size: 1.9rem;
+    font-weight: 800;
     color: var(--color-primary);
 }
 
 .nav a {
     color: var(--color-light);
     text-decoration: none;
-    margin-left: 1.2rem;
+    margin-left: 1.5rem;
     font-weight: 500;
-    font-size: 1.1rem;
-    padding: 0.5rem;
-    /* Transición simple de color */
+    font-size: 1rem;
+    padding: 0.5rem 0;
     transition: color 0.2s;
 }
 
@@ -61,33 +72,43 @@ body {
 }
 
 /* ========================================================== */
-/* 🏀 3. BOTONES Y ACCIONES */
+/* 🏀 3. BOTONES Y ACCIONES GENERALES */
 /* ========================================================== */
 .btn-action,
-.btn-open {
+.btn-open,
+.btn-primary,
+.btn-primary-outline,
+.btn-secondary,
+.btn-danger {
     border: none;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 2rem;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
-    border-radius: 5px; /* Bordes cuadrados, más sencillos */
-    transition: background-color 0.2s; /* Transición simple de fondo */
+    border-radius: 6px; 
+    transition: background-color 0.2s, transform 0.1s, border-color 0.2s;
     text-transform: uppercase;
 }
 
 .btn-primary { 
     background-color: var(--color-primary);
     color: var(--color-light);
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary:hover {
-    background-color: #e64a19;
+    background-color: #e64a00;
+    border-color: #e64a00;
+    transform: translateY(-2px); 
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary-outline { 
     background-color: transparent;
     border: 2px solid var(--color-primary);
     color: var(--color-primary);
+    box-shadow: none;
 }
 
 .btn-primary-outline:hover {
@@ -95,120 +116,159 @@ body {
     color: var(--color-light);
 }
 
-.btn-secondary { 
-    background-color: #607d8b;
-    color: var(--color-light);
+/* Botón de cierre de modal (Icono de X) */
+.btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem; 
+    color: var(--color-text-light);
+    cursor: pointer;
+    transition: color 0.2s, transform 0.2s;
+    padding: 5px;
 }
-
-.btn-secondary:hover {
-    background-color: #455a64;
-}
-
-.btn-danger { 
-    background-color: var(--color-danger);
-    color: var(--color-light);
-}
-
-.btn-danger:hover {
-    background-color: #181716;
+.btn-close:hover {
+    color: var(--color-primary);
+    transform: rotate(90deg);
 }
 
 /* ========================================================== */
-/* 🏀 4. SECCIONES Y CONTENIDO */
+/* 🏀 4. LAYOUT GENERAL Y TÍTULOS */
 /* ========================================================== */
 main {
     padding-bottom: 4rem;
 }
 
 .content-section {
-    padding: 4rem 5%;
-    max-width: 1200px;
+    padding: 50px 5%;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
 .section-gray {
-    background-color: var(--color-gray);
+    background-color: var(--color-gray-soft);
 }
 
 h2 {
+    font-family: var(--font-heading);
     font-size: 2.5rem;
     color: var(--color-secondary);
-    margin-bottom: 2rem;
     text-align: center;
-    border-bottom: 2px solid var(--color-primary);
-    padding-bottom: 0.5rem;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--color-primary);
+    display: inline-block;
+    padding-bottom: 5px;
+    width: auto;
+    display: block; /* Centrar el bloque */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* SECCIÓN HEROE (Imagen de fondo para el baloncesto) */
+/* --- HERO SECTION (Portada) --- */
 .hero-background-image {
-    /* *** Configuración de la Imagen de Fondo *** */
-    /* Mismo fondo, pero sin los efectos de sombra */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('https://images.unsplash.com/photo-1546519638-68e109498257') no-repeat center center/cover;
-    height: 60vh; /* Altura más sencilla */
+    /* Usamos una imagen de fondo con degradado oscuro para que el texto resalte */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                 url('https://images.unsplash.com/photo-1546519638-68e109498257') no-repeat center center/cover;
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: var(--color-light);
     text-align: center;
+    padding: 0 5%;
 }
 
-.hero-content {
-    max-width: 900px;
-}
-
-.hero h1 {
+.hero-content h1 {
+    font-family: var(--font-heading);
     font-size: 4rem;
     color: var(--color-primary);
     margin-bottom: 1rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.hero p {
+.hero-content p {
     font-size: 1.4rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
 }
 
-/* ESTILOS DEL BLOG */
-.blog-post {
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* ========================================================== */
+/* 🏀 5. ESTILOS DE PORTAFOLIO/BLOG (TARJETAS) */
+/* ========================================================== */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px;
+}
+
+.blog-post { /* Tarjeta de proyecto/post */
     background-color: var(--color-light);
-    padding: 2rem;
-    border-radius: 8px; /* Bordes más sutiles */
-    border: 1px solid #ddd; /* Borde simple */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+    /* Contenedor de la imagen para asegurar uniformidad en Portafolio */
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--color-primary);
+}
+
+/* Imagen para posts de blog individuales (más alta) */
+.blog-post > img:not(.project-image) {
+    max-height: 400px;
+    margin-bottom: 1.5rem;
 }
 
 .blog-post h3 {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    padding: 15px 20px 5px 20px;
+    color: var(--color-secondary);
+}
+
+.blog-post .post-meta {
+    font-size: 0.9rem;
     color: var(--color-primary);
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.5rem;
+    font-weight: 600;
+    padding: 0 20px 10px 20px;
 }
 
-.post-meta {
-    font-style: italic;
-    color: #777;
-    margin-bottom: 1.5rem;
+.blog-post p {
+    padding: 0 20px 20px 20px;
+    font-size: 1rem;
 }
 
-.blog-post img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 1.5rem;
-}
-
+/* Estilos de Lista */
 .blog-post ul {
     list-style: none;
-    padding-left: 0;
-    margin-top: 1.5rem;
+    padding: 0 20px 20px 40px; /* Ajuste para el ícono */
 }
 
 .blog-post ul li {
     padding-left: 1.5rem;
     position: relative;
     margin-bottom: 0.5rem;
-    font-size: 1rem;
 }
 
 .blog-post ul li::before {
@@ -219,468 +279,92 @@ h2 {
     font-size: 0.8rem;
 }
 
-
 /* ========================================================== */
-/* 🏀 5. FORMULARIO Y LOCALSTORAGE */
+/* 🏀 6. MODAL Y FORMULARIO (Autenticación) */
 /* ========================================================== */
-.form-container {
-    background-color: var(--color-light);
-    padding: 2rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    max-width: 600px;
-    margin: 0 auto;
+.input-group input:focus,
+.modal input:focus {
+    border: 2px solid var(--color-primary) !important;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 92, 0, 0.3);
+    transition: 0.2s;
 }
 
-.form-description {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #555;
-}
+/* Otros estilos de la Modal (Simplificados y limpios) */
+.hidden { display: none !important; }
 
-.input-group {
-    margin-bottom: 1rem;
-}
-
-.input-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: var(--color-primary);
-}
-
-.input-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.error {
-    color: var(--color-danger);
-    font-size: 0.9rem;
-    margin-top: 0.25rem;
-}
-
-.button-group {
-    display: flex;
-    gap: 0.8rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* RESULTADOS LOCALSTORAGE */
-.data-result {
-    margin-top: 2rem;
-    padding: 1rem;
-    border: 2px dashed var(--color-primary);
-    border-radius: 6px;
-    background-color: #fff8e1;
-    display: none;
-}
-
-.usuario {
-    background-color: var(--color-light);
-    padding: 0.8rem;
-    border-left: 4px solid var(--color-primary);
-    border-radius: 4px;
-    margin-bottom: 0.8rem;
-}
-
-.btn-borrar-individual {
-    background-color: var(--color-danger);
-    color: var(--color-light);
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    margin-top: 0.5rem;
-}
-
-/* ========================================================== */
-/* 🏀 6. MODAL Y OVERLAY */
-/* ========================================================== */
-.hidden {
-    display: none !important;
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
 }
 
 .modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 400px;
+    width: 90%;
+    max-width: 450px; 
     background-color: var(--color-light);
-    padding: 2rem;
-    border-radius: 10px;
+    padding: 0 0 35px 0; 
+    border-radius: 12px;
     z-index: 200;
-    text-align: center;
-    border: 3px solid var(--color-primary);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
 }
 
-.modal h3 {
-    color: var(--color-secondary);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
+/* Se asume que los estilos detallados de pestañas e inputs de la modal
+   (como los .auth-tabs, .auth-view, .input-icon-group, etc.) 
+   se añadirían aquí si los necesitáramos para la modal avanzada. 
+   Por ahora, usamos los inputs generales: */
 .modal input {
-    padding: 0.75rem;
-    border-radius: 4px;
-    margin-bottom: 0.75rem;
+    padding: 15px 15px; 
+    border: 1px solid var(--color-border-input);
+    border-radius: 8px; 
+    font-size: 1rem;
+    margin-bottom: 15px;
     width: 100%;
-    border: 1px solid #ddd;
 }
 
-.btn-close {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    font-size: 2rem;
-    color: #aaa;
-    cursor: pointer;
-    border: none;
-    background: none;
-}
-
-.btn-close:hover {
-    color: var(--color-danger);
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Oscurecimiento simple */
-    z-index: 100;
-}
-/* Inputs color naranja al escribir */
-input:focus {
-    border: 2px solid #ff7b00 !important;
-    outline: none;
-    box-shadow: 0 0 5px rgba(255, 123, 0, 0.5);
-    transition: 0.2s;
-}
-
-/* Barra de términos */
+/* Barra de términos (ejemplo) */
 .terms-bar {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 12px 0;
+    margin: 15px 0;
     font-size: 14px;
+    color: var(--color-text-dark);
 }
-
 .terms-bar a {
-    color: #ff7b00;
+    color: var(--color-primary);
     text-decoration: none;
+    font-weight: 600;
 }
-
-.terms-bar a:hover {
-    text-decoration: underline;
-}
-
-/* Checkbox pequeño */
 .terms-bar input[type="checkbox"] {
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-primary);
 }
 
-/* Cuando lo seleccionan */
-.terms-bar input[type="checkbox"]:checked {
-    accent-color: #ff7b00; /* color naranja */
-}
-.small-img {
-    width: 280px;          /* Tamaño controlado */
-    max-width: 80%;        /* Para móviles */
-    display: block;
-    margin: 15px auto;     /* Centrada */
-    border-radius: 15px;   /* Bordes redondeados */
-    object-fit: cover;     /* Evita deformaciones */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Sombra */
-}
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f2f2f2;
-}
-
-/* HEADER */
-.header {
-    background: #1a1a1a;
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.nav a:hover {
-    color: #ff9800;
-}
-
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 40px;
-    background: white;
-}
-
-.small-img {
-    width: 250px;
-    border-radius: 10px;
-    margin-top: 20px;
-}
-
-/* SECCIONES */
-.info-section {
-    background: white;
-    margin: 20px auto;
-    padding: 25px;
-    max-width: 700px;
-    border-radius: 10px;
-}
-
-.info-section h2 {
-    text-align: center;
-}
-
-.info-section ul {
-    padding-left: 20px;
-}
-
-/* MODAL */
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 300px;
-    z-index: 10;
-}
-
-.hidden {
-    display: none;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 5;
-}
-
-.btn-action, .btn-open {
-    background: #ff9800;
-    padding: 10px 20px;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.btn-close {
-    background: none;
-    border: none;
-    font-size: 24px;
-    float: right;
-    cursor: pointer;
-}
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f3f3f3;
-}
-
-/* ----- HEADER ----- */
-.header {
-    background: #1a1a1a;
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.nav a:hover {
-    color: #ff9800;
-}
-
-/* ----- HERO ----- */
-.hero {
-    text-align: center;
-    padding: 40px;
-    background: white;
-}
-
-.small-img {
-    width: 230px;
-    border-radius: 10px;
-    margin-top: 15px;
-}
-
-/* ----- SECCIONES ----- */
-.info-section {
-    background: white;
-    margin: 20px auto;
-    padding: 25px;
-    max-width: 750px;
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-}
-
-.info-section h2 {
-    text-align: center;
-}
-
-.info-section ul {
-    padding-left: 20px;
-}
-
-/* ----- MODAL ----- */
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 300px;
-    z-index: 10;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
-
-.hidden {
-    display: none;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 5;
-}
-
-.btn-action, .btn-open {
-    background: #ff9800;
-    padding: 10px 20px;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.btn-close {
-    background: none;
-    border: none;
-    font-size: 24px;
-    float: right;
-    cursor: pointer;
-}
-
-/* ----- FOOTER NARANJA ----- */
+/* ========================================================== */
+/* 🏀 7. FOOTER */
+/* ========================================================== */
 .footer {
-    background: #ff9800;
-    color: white;
+    background-color: var(--color-secondary);
+    color: var(--color-light);
+    padding: 30px 5%;
     text-align: center;
-    padding: 15px 0;
-    margin-top: 30px;
+    font-size: 0.9rem;
+    border-top: 4px solid var(--color-primary);
+}
+
+.footer p {
+    margin: 5px 0;
+    color: var(--color-border-input);
+}
+.footer p:first-child {
     font-weight: bold;
+    color: var(--color-light);
+    font-size: 1rem;
 }
-.dashboard-container {
-  width: 90%;
-  margin: 40px auto;
-  color: rgb(24, 23, 23);
-  font-family: Arial, sans-serif;
-}
-
-.dashboard-title {
-  text-align: center;
-  font-size: 35px;
-  margin-bottom: 30px;
-  color: #ff6a00;
-  text-shadow: 0 0 10px rgba(255,100,0,0.6);
-}
-
-/* GRID DE TARJETAS */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-  margin-bottom: 30px;
-}
-
-/* TARJETAS */
-.stat-card {
-  background: #201f1e;
-  padding: 25px;
-  border-radius: 15px;
-  border: 2px solid #ff6a00;
-  text-align: center;
-  box-shadow: 0 0 18px rgba(255,100,0,0.25);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 25px rgba(255,100,0,0.5);
-}
-
-.stat-icon {
-  font-size: 45px;
-  margin-bottom: 15px;
-}
-
-.stat-card h3 {
-  font-size: 20px;
-  color: #ff6a00;
-  margin-bottom: 10px;
-}
-
-.stat-card p {
-  font-size: 35px;
-  font-weight: bold;
-}
-
-/* GRAFICO */
-.chart-box {
-  background: #111;
-  padding: 20px;
-  border: 2px solid #ff6a00;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(255,100,0,0.3);
-}
-
