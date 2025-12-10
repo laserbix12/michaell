@@ -479,3 +479,89 @@ document.querySelectorAll("#cerrarSesion, #eliminarCuenta").forEach(link => {
    11. EJECUCIÓN INICIAL (Sin cambios)
    ==================================================================== */
 document.addEventListener("DOMContentLoaded", checkSession);
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Elementos de la Modal
+    const authModal = document.getElementById('authModal');
+    const overlay = document.querySelector('.overlay');
+    
+    // Botones de Apertura y Cierre
+    const openAuthModalBtn = document.getElementById('openAuthModal');
+    const closeBtn = authModal.querySelector('.auth-close');
+
+    // 2. Elementos de las Pestañas
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const loginView = document.getElementById('loginView');
+    const registerView = document.getElementById('registerView');
+
+    // Enlaces de cambio rápido entre formularios
+    const switchToRegisterLink = document.getElementById('switchToRegister');
+    const switchToLoginLink = document.getElementById('switchToLogin');
+    
+    // Función para abrir la modal
+    function openModal(initialTab = 'login') {
+        authModal.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+        // Asegura que la vista correcta esté activa al abrir
+        if (initialTab === 'register') {
+             switchTab(tabRegister, registerView);
+        } else {
+             switchTab(tabLogin, loginView);
+        }
+    }
+
+    // Función para cerrar la modal
+    function closeModal() {
+        authModal.classList.add('hidden');
+        overlay.classList.add('hidden');
+    }
+
+    // Función para cambiar la pestaña activa
+    function switchTab(clickedTab, targetView) {
+        // Remover 'active' de todas las pestañas y vistas
+        tabLogin.classList.remove('active');
+        tabRegister.classList.remove('active');
+        loginView.classList.remove('active');
+        registerView.classList.remove('active');
+
+        // Agregar 'active' a la pestaña y vista seleccionadas
+        clickedTab.classList.add('active');
+        targetView.classList.add('active');
+    }
+
+    // --- MANEJO DE EVENTOS ---
+    
+    // ABRIR MODAL
+    openAuthModalBtn.addEventListener('click', () => openModal('login'));
+
+    // CERRAR MODAL
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !authModal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+
+    // CAMBIO DE PESTAÑAS (TABS)
+    tabLogin.addEventListener('click', () => switchTab(tabLogin, loginView));
+    tabRegister.addEventListener('click', () => switchTab(tabRegister, registerView));
+
+    // CAMBIO DE ENLACES (DENTRO DEL FORMULARIO)
+    switchToRegisterLink.addEventListener('click', () => switchTab(tabRegister, registerView));
+    switchToLoginLink.addEventListener('click', () => switchTab(tabLogin, loginView));
+    
+    // MANEJO DEL OJO (Toggle Password Visibility)
+    const togglePasswords = authModal.querySelectorAll('.toggle-password');
+    togglePasswords.forEach(icon => {
+        icon.addEventListener('click', () => {
+            const passwordInput = icon.previousElementSibling;
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    });
+
+    // Nota: Aquí iría la lógica de envío de formularios (loginForm, registerForm)
+});
