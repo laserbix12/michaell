@@ -1,23 +1,38 @@
+<div class="overlay hidden"></div>
+
 <div id="authModal" class="modal hidden">
-    <button class="btn-close auth-close">&times;</button>
+    
+    <button class="btn-close auth-close" aria-label="Cerrar modal">&times;</button>
 
     <div class="auth-tabs">
         <div id="tabLogin" class="auth-tab-item active" data-target="login">Iniciar sesión</div>
         <div id="tabRegister" class="auth-tab-item" data-target="register">Registrarse</div>
     </div>
+
     <div class="auth-content">
+        
         <div id="loginView" class="auth-view active">
+            
             <h3>Iniciar Sesión</h3> 
             <form id="loginForm">
-                <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
-                <input type="password" id="loginPassword" placeholder="Contraseña" required>
-
-                <div class="terms-bar">
-                    <input type="checkbox" id="loginTerms" required>
-                    <label for="loginTerms">Recordar sesión</label>
+                
+                <div class="input-icon-group">
+                    <i class="icon fas fa-file-alt"></i> <select id="loginTipoDoc">
+                        <option value="">Tipo o completo *</option>
+                        <option value="DNI">DNI</option>
+                        <option value="Pasaporte">Pasaporte</option>
+                    </select>
                 </div>
 
-                <button type="submit" class="btn-action btn-primary" style="margin-top: 10px; width: 100%;">Entrar</button>
+                <div class="input-icon-group">
+                    <i class="icon fas fa-user"></i> <input type="text" id="loginDocumento" placeholder="Número de documento *" required>
+                </div>
+                
+                <div class="input-icon-group password-group">
+                    <i class="icon fas fa-lock"></i> <input type="password" id="loginPassword" placeholder="Contraseña *" required>
+                    <i class="toggle-password fas fa-eye"></i> </div>
+                
+                <button type="submit" class="btn-action btn-primary" style="margin-top: 25px;">ENTRAR</button>
             </form>
             
             <div class="switch-option">
@@ -27,19 +42,20 @@
         </div>
 
         <div id="registerView" class="auth-view">
-            <h3>Registro</h3> 
+            
+            <h3>Registrarse</h3> 
             <form id="registerForm">
-                <input type="text" id="regName" placeholder="Nombre completo" required>
-                <input type="email" id="regEmail" placeholder="Correo electrónico" required>
-                <input type="password" id="regPassword" placeholder="Contraseña" required>
-                <input type="password" id="regConfirmPassword" placeholder="Confirmar contraseña" required>
+                <input type="text" id="regName" placeholder="Nombre completo *" required>
+                <input type="email" id="regEmail" placeholder="Correo electrónico *" required>
+                <input type="password" id="regPassword" placeholder="Contraseña *" required>
+                <input type="password" id="regConfirmPassword" placeholder="Confirmar contraseña *" required>
                 
                 <div class="terms-bar">
                     <input type="checkbox" id="regTerms" required>
-                    <label for="regTerms">Acepto los <a href="#">Términos y Condiciones</a></label>
+                    <label for="regTerms">Acepto los <a href="#" class="switch-link">Términos y Condiciones</a></label>
                 </div>
 
-                <button type="submit" class="btn-action btn-secondary" style="margin-top: 10px; width: 100%;">Crear Cuenta</button>
+                <button type="submit" class="btn-action btn-primary" style="margin-top: 10px;">CREAR CUENTA</button>
             </form>
             
             <div class="switch-option">
