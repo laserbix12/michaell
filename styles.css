@@ -683,4 +683,63 @@ body {
   border-radius: 15px;
   box-shadow: 0 0 20px rgba(255,100,0,0.3);
 }
+/* Definición de la variable de color (si no la tienes ya) */
+:root {
+    --color-primary: #ff5c00; /* Naranja Baloncesto Total */
+}
 
+/* -------------------------------------- */
+/* ESTILOS ESPECÍFICOS DE LA PESTAÑA (Tabs) */
+/* -------------------------------------- */
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px; /* Separación entre tabs y contenido del formulario */
+    border-bottom: 1px solid #ccc; /* Línea divisoria suave */
+}
+
+.auth-tab-item {
+    flex: 1; /* Para que ocupen el mismo ancho */
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #555; /* Color de texto normal */
+    
+    /* Propiedades para la línea naranja (inicialmente transparente) */
+    border-bottom: 3px solid transparent;
+    transition: border-bottom 0.2s ease, color 0.2s ease;
+}
+
+/* Estado Activo: Aplica el color naranja y la línea */
+.auth-tab-item.active {
+    color: var(--color-primary); /* Texto naranja */
+    border-bottom: 3px solid var(--color-primary); /* Línea naranja */
+}
+
+/* Asegurar que el modal no esté centrado verticalmente si hay pestañas */
+.modal {
+    padding-top: 20px; 
+}
+
+/* Ajuste para que el título del formulario se vea bien dentro del contenido */
+.auth-view h3 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+/* Asegurar que los botones de acción sean naranjas */
+.btn-action.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+.btn-action.btn-secondary {
+    background-color: #ff8c42; /* Un tono un poco más claro para el secundario */
+    border-color: #ff8c42;
+    color: white;
+}

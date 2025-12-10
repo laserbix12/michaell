@@ -3,8 +3,7 @@
    ==================================================================== */
 
 // ====================================================================
-// 1. OBTENCIÓN Y DECLARACIÓN DE ELEMENTOS DEL DOM (GLOBAL)
-//    NOTA: Se unifican las declaraciones de constantes repetidas.
+// 1. OBTENCIÓN Y DECLARACIÓN DE ELEMENTOS DEL DOM (GLOBAL UNIFICADO)
 // ====================================================================
 
 // Elementos de la Modal de Autenticación
@@ -16,8 +15,15 @@ const overlay = document.querySelector('.overlay');
 // Vistas dentro de la Modal
 const loginView = document.getElementById('loginView');
 const registerView = document.getElementById('registerView');
+
+// Enlaces para alternar dentro del formulario
 const switchToRegisterLink = document.getElementById('switchToRegister');
 const switchToLoginLink = document.getElementById('switchToLogin');
+
+// Elementos de las Pestañas (Añadidos en la corrección anterior)
+const authTabItems = document.querySelectorAll('.auth-tab-item');
+const tabLogin = document.getElementById('tabLogin');
+const tabRegister = document.getElementById('tabRegister');
 
 // Formularios y Campos
 const loginForm = document.getElementById("loginForm");
@@ -46,7 +52,7 @@ const eliminarCuentaBtn = document.getElementById("eliminarCuentaBtn");
 
 
 // ====================================================================
-// 2. FUNCIONES DE CONTROL DE LA MODAL
+// 2. FUNCIONES DE CONTROL DE LA MODAL (AJUSTADAS PARA PESTAÑAS)
 // ====================================================================
 
 /**
@@ -60,11 +66,8 @@ const openAuthModal = (viewToShow = 'login') => {
     overlay.classList.remove('hidden');
     switchView(viewToShow);
 
-    // Actualiza el título de la modal (si existe en el HTML)
-    const modalTitle = document.querySelector('.modal h3');
-    if (modalTitle) {
-        modalTitle.textContent = viewToShow === 'login' ? "Iniciar Sesión" : "Registro";
-    }
+    // Nota: El título (<h3>) se mantiene dentro de cada div.auth-view en el HTML,
+    // por lo que no necesita ser actualizado aquí.
 };
 
 /**
@@ -77,35 +80,44 @@ const closeAuthModal = () => {
 };
 
 /**
- * Alterna entre las vistas de Login y Registro dentro de la modal.
+ * Alterna entre las vistas de Login y Registro (contenido y pestañas).
  * @param {string} targetView - 'login' o 'register'.
  */
 const switchView = (targetView) => {
-    if (!loginView || !registerView) return;
+    // Es vital chequear si existen las pestañas antes de manipularlas
+    if (!loginView || !registerView) return; 
 
+    // 1. Alterna las Vistas del Contenido
     loginView.classList.remove('active');
     registerView.classList.remove('active');
 
+    // 2. Alterna el estado activo de las Pestañas (si existen)
+    if (tabLogin && tabRegister) {
+        tabLogin.classList.remove('active');
+        tabRegister.classList.remove('active');
+
+        if (targetView === 'login') {
+            tabLogin.classList.add('active');
+        } else if (targetView === 'register') {
+            tabRegister.classList.add('active');
+        }
+    }
+    
+    // 3. Muestra la vista de formulario correcta
     if (targetView === 'login') {
         loginView.classList.add('active');
     } else if (targetView === 'register') {
         registerView.classList.add('active');
     }
-
-    // Actualiza el título de la modal al cambiar la vista
-    const modalTitle = document.querySelector('.modal h3');
-    if (modalTitle) {
-        modalTitle.textContent = targetView === 'login' ? "Iniciar Sesión" : "Registro";
-    }
 };
 
 
 // ====================================================================
-// 3. EVENTOS DE LA MODAL
+// 3. EVENTOS DE LA MODAL (AJUSTADOS PARA PESTAÑAS)
 // ====================================================================
 
 if (authModal) {
-    // Eventos para abrir el modal desde el Hero
+    // 1. Eventos para abrir el modal desde el Hero
     openAuthBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const view = e.currentTarget.getAttribute('data-view');
@@ -113,11 +125,19 @@ if (authModal) {
         });
     });
 
-    // Eventos para cerrar el modal
+    // 2. Eventos para cerrar el modal
     if (closeAuthBtn) closeAuthBtn.addEventListener('click', closeAuthModal);
     if (overlay) overlay.addEventListener('click', closeAuthModal);
 
-    // Eventos para alternar entre las vistas dentro del modal
+    // 3. Eventos para las NUEVAS pestañas (tabLogin, tabRegister)
+    authTabItems.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const view = tab.getAttribute('data-target');
+            switchView(view);
+        });
+    });
+
+    // 4. Eventos para alternar entre las vistas desde los enlaces "Regístrate aquí" / "Inicia sesión"
     if (switchToRegisterLink) switchToRegisterLink.addEventListener('click', (e) => {
         e.preventDefault(); 
         switchView('register');
@@ -127,7 +147,7 @@ if (authModal) {
         switchView('login');
     });
 
-    // Manejo de la tecla ESC
+    // 5. Manejo de la tecla ESC
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !authModal.classList.contains('hidden')) {
             closeAuthModal();
@@ -137,7 +157,7 @@ if (authModal) {
 
 
 // ====================================================================
-// 4. LÓGICA DE FORMULARIOS Y SESIÓN
+// 4. LÓGICA DE FORMULARIOS Y SESIÓN (Sin cambios en la lógica)
 // ====================================================================
 
 if (loginForm) {
@@ -191,7 +211,7 @@ if (registerForm) {
 
 
 // ====================================================================
-// 5. FUNCIONES DE CIERRE/ELIMINACIÓN DE SESIÓN
+// 5. FUNCIONES DE CIERRE/ELIMINACIÓN DE SESIÓN (Sin cambios)
 // ====================================================================
 
 function handleLogout(e) {
@@ -224,7 +244,7 @@ function handleDeleteAccount() {
 
 
 // ====================================================================
-// 6. VERIFICACIÓN DE SESIÓN (checkSession)
+// 6. VERIFICACIÓN DE SESIÓN (checkSession) (Sin cambios)
 // ====================================================================
 
 function checkSession() {
@@ -268,7 +288,7 @@ function checkSession() {
 
 
 // ====================================================================
-// 7. FUNCIONES CRUD DE USUARIOS DE PRUEBA
+// 7. FUNCIONES CRUD DE USUARIOS DE PRUEBA (Sin cambios)
 // ====================================================================
 
 function limpiarFormulario() {
@@ -338,7 +358,7 @@ function mostrarUsuarios() {
 }
 
 // ====================================================================
-// 8. EVENTOS CRUD DE USUARIOS DE PRUEBA
+// 8. EVENTOS CRUD DE USUARIOS DE PRUEBA (Sin cambios)
 // ====================================================================
 
 if (btnGuardar) {
@@ -401,7 +421,7 @@ if (btnLimpiarDashboard) {
 
 
 // ====================================================================
-// 9. DASHBOARD (GRÁFICA)
+// 9. DASHBOARD (GRÁFICA) (Sin cambios)
 // ====================================================================
 
 if (document.getElementById("grafico")) {
@@ -435,7 +455,7 @@ if (document.getElementById("grafico")) {
 
 
 // ====================================================================
-// 10. ASIGNACIÓN DE EVENTOS FINALES
+// 10. ASIGNACIÓN DE EVENTOS FINALES (Sin cambios)
 // ====================================================================
 
 // Botones de cierre/eliminación del Dashboard
@@ -456,6 +476,6 @@ document.querySelectorAll("#cerrarSesion, #eliminarCuenta").forEach(link => {
 
 
 /* ====================================================================
-   11. EJECUCIÓN INICIAL
+   11. EJECUCIÓN INICIAL (Sin cambios)
    ==================================================================== */
 document.addEventListener("DOMContentLoaded", checkSession);

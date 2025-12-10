@@ -1,85 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso | Baloncesto Total</title>
-    <link rel="stylesheet" href="styles.css">
-    
-    <style>
-        /* Estilos base (Manteniendo la estructura que ya tenías) */
-        .button-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 20px;
-        }
+<div id="authModal" class="modal hidden">
+    <button class="btn-close auth-close">&times;</button>
 
-        /* Estilos específicos para la vista de autenticación */
-        .auth-view {
-            display: none; /* Por defecto, ocultar ambas vistas */
-            text-align: left; /* Alineación para formularios */
-            padding: 0 1rem;
-        }
-        
-        /* La vista que se está mostrando actualmente */
-        .auth-view.active {
-            display: block;
-        }
-
-        /* Estilos para el texto de cambio de vista */
-        .switch-option {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-        .switch-link {
-            cursor: pointer;
-            color: var(--color-primary); /* Naranja */
-            font-weight: bold;
-            text-decoration: underline;
-        }
-        
-        /* Asegurando que la modal no esté centrada en el texto si no tiene título/párrafo */
-        .modal h3, .modal p {
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-
-    <header class="header">
-        <div class="logo">Baloncesto Total</div>
-        <nav class="nav">
-            <a href="index.html">Inicio</a>
-            <a href="Iniciar sesión.html">Iniciar sesión</a>
-            
-            <a href="Blog.html">Blog</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="portafolio.html">Portafolio</a>
-        </nav>
-    </header>
-
-    <main>
-        <section id="iniciar-sesion" class="hero hero-background-image">
-            <div class="hero-content">
-                <h1>Acceso de Usuario</h1>
-                <p>Inicia sesión o regístrate en un solo lugar.</p>
-                <div class="button-group">
-                    <button id="openAuthModal" data-view="login" class="btn-action btn-primary">Iniciar sesión</button>
-                    <button id="openAuthModal2" data-view="register" class="btn-action btn-secondary">Registro</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="authModal" class="modal hidden">
-        <button class="btn-close auth-close">&times;</button>
-
+    <div class="auth-tabs">
+        <div id="tabLogin" class="auth-tab-item active" data-target="login">Iniciar sesión</div>
+        <div id="tabRegister" class="auth-tab-item" data-target="register">Registrarse</div>
+    </div>
+    <div class="auth-content">
         <div id="loginView" class="auth-view active">
-            <h3>Iniciar Sesión</h3>
-            <p>Introduce tus datos para acceder.</p>
-            
+            <h3>Iniciar Sesión</h3> 
             <form id="loginForm">
                 <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
                 <input type="password" id="loginPassword" placeholder="Contraseña" required>
@@ -99,9 +27,7 @@
         </div>
 
         <div id="registerView" class="auth-view">
-            <h3>Registro</h3>
-            <p>Completa los campos para crear tu cuenta.</p>
-            
+            <h3>Registro</h3> 
             <form id="registerForm">
                 <input type="text" id="regName" placeholder="Nombre completo" required>
                 <input type="email" id="regEmail" placeholder="Correo electrónico" required>
@@ -122,9 +48,4 @@
             </div>
         </div>
     </div>
-
-    <div class="overlay hidden"></div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+</div>
