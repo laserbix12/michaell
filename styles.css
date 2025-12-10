@@ -142,6 +142,14 @@ body {
     justify-content: center;
 }
 
+/* 🏀 4.1. IMÁGENES RESPONSIVAS */
+/* Regla general para que todas las imágenes sean responsivas y no rompan el layout */
+img {
+    max-width: 100%; /* Asegura que la imagen nunca exceda el ancho de su contenedor */
+    height: auto;    /* Mantiene la proporción de la imagen para que no se distorsione */
+    display: block;  /* Ayuda a controlar el espaciado si la imagen es un elemento de bloque */
+}
+
 /* ========================================================== */
 /* 🏀 5. MODAL DE AUTENTICACIÓN */
 /* ========================================================== */
@@ -165,12 +173,12 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 450px; /* Ancho ligeramente mayor */
+    max-width: 450px; 
     background-color: var(--color-light);
-    padding: 0 0 35px 0; /* Padding solo abajo */
+    padding: 0 0 35px 0; 
     border-radius: 12px;
     z-index: 200;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25); /* Sombra marcada y elegante */
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25); 
     display: flex; 
     flex-direction: column;
 }
@@ -181,7 +189,7 @@ body {
     justify-content: space-around;
     width: 100%;
     border-bottom: 1px solid var(--color-border-input);
-    margin-bottom: 30px; /* Más separación del formulario */
+    margin-bottom: 30px; 
     padding-top: 10px;
     padding-left: 20px;
     padding-right: 50px; 
@@ -229,7 +237,7 @@ body {
 /* --- INPUTS Y FORMULARIO --- */
 .input-icon-group {
     position: relative;
-    margin-bottom: 20px; /* Más espacio entre inputs */
+    margin-bottom: 20px; 
 }
 
 .input-icon-group .icon,
@@ -237,7 +245,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.1rem; /* Íconos ligeramente más grandes */
+    font-size: 1.1rem; 
     color: var(--color-text-light); 
     z-index: 10;
 }
@@ -256,7 +264,7 @@ input[type="email"],
 input[type="password"],
 select {
     width: 100%;
-    padding: 15px 15px 15px 45px; /* Padding alto y a la izquierda para el ícono */
+    padding: 15px 15px 15px 45px; 
     border: 1px solid var(--color-border-input);
     border-radius: 8px; 
     box-sizing: border-box;
@@ -279,7 +287,7 @@ input:focus,
 select:focus {
     border: 2px solid var(--color-primary) !important;
     outline: none;
-    box-shadow: 0 0 5px rgba(255, 92, 0, 0.3); /* Sombra de enfoque sutil */
+    box-shadow: 0 0 5px rgba(255, 92, 0, 0.3); 
 }
 
 /* Estilo para el botón ENTRAR y CREAR CUENTA */
@@ -287,7 +295,7 @@ select:focus {
     width: 100%;
     padding: 16px 0; 
     font-size: 1.1rem;
-    margin-top: 30px; /* Más espacio sobre el botón */
+    margin-top: 30px; 
 }
 
 /* --- ENLACES Y TÉRMINOS --- */
