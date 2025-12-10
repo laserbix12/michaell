@@ -743,29 +743,21 @@ body {
     border-color: #ff8c42;
     color: white;
 }
-/* Definición de la variable de color */
-:root {
-    --color-primary: #ff5c00; /* Naranja Principal */
-    --color-text-dark: #333; /* Texto Negro/Gris Oscuro */
-    --color-text-light: #888; /* Texto Gris Claro */
-    --color-border: #ccc; /* Borde Gris */
-    --color-background-white: #fff;
+/* ========================================================== */
+/* 🏀 6. MODAL Y OVERLAY (UNIFICADO) */
+/* ========================================================== */
+.hidden {
+    display: none !important;
 }
 
-/* -------------------------------------- */
-/* ESTILOS GENERALES DE LA MODAL */
-/* -------------------------------------- */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
-    z-index: 1000;
-}
-.hidden {
-    display: none !important;
+    background-color: rgba(0, 0, 0, 0.7); /* Oscurecimiento más fuerte */
+    z-index: 100;
 }
 
 .modal {
@@ -773,43 +765,26 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--color-background-white); /* Fondo blanco */
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    max-width: 420px; /* Ajuste el ancho para que se parezca a la imagen */
     width: 90%;
-    z-index: 1001;
-    display: flex; /* Flex para organizar las pestañas y el contenido */
+    max-width: 420px; /* Ancho ajustado para parecerse a la imagen */
+    background-color: var(--color-light);
+    padding: 20px; /* Menos padding en general */
+    border-radius: 10px;
+    z-index: 200;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    /* Se remueve el borde naranja aquí para que solo lo tenga la línea de la pestaña */
+    display: flex; 
     flex-direction: column;
 }
 
-/* Botón de cierre (X) */
-.btn-close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--color-text-light); /* Gris claro */
-    cursor: pointer;
-    transition: color 0.2s;
-}
-.btn-close:hover {
-    color: var(--color-primary); /* Naranja al pasar el ratón */
-}
-
-/* -------------------------------------- */
-/* ESTILOS DE PESTAÑAS (Tabs) */
-/* -------------------------------------- */
+/* --- ESTILOS DE PESTAÑAS (TABS) --- */
 .auth-tabs {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 25px; 
-    border-bottom: 1px solid var(--color-border); /* Línea divisoria gris */
-    padding-bottom: 5px;
+    margin-bottom: 20px; 
+    padding-top: 10px;
+    border-bottom: 1px solid var(--color-border-input); /* Línea divisoria suave */
 }
 
 .auth-tab-item {
@@ -819,153 +794,116 @@ body {
     cursor: pointer;
     font-weight: 600;
     font-size: 1.1rem;
-    color: var(--color-text-light); /* Gris para pestañas inactivas */
+    color: var(--color-text-light); /* Gris para texto inactivo */
+    
     border-bottom: 3px solid transparent;
-    transition: border-bottom 0.3s ease, color 0.3s ease;
+    transition: border-bottom 0.2s ease, color 0.2s ease;
 }
 
-/* Estado Activo: Texto y línea naranja */
+/* Estado Activo: Aplica el color naranja y la línea */
 .auth-tab-item.active {
     color: var(--color-primary); /* Texto naranja */
     border-bottom: 3px solid var(--color-primary); /* Línea naranja */
 }
 
-/* -------------------------------------- */
-/* VISTAS Y CONTENIDO */
-/* -------------------------------------- */
-.auth-content {
-    flex-grow: 1;
-}
 
-/* Título principal dentro del formulario */
+/* --- ESTILOS DEL CONTENIDO DE LA MODAL --- */
+
 .auth-view h3 {
     text-align: center;
     color: var(--color-primary); /* Título Principal en naranja */
-    margin-top: 0;
-    margin-bottom: 25px;
-    font-size: 2rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 2rem; /* Tamaño de fuente grande como en la imagen */
     font-weight: 700;
 }
 
+/* Asegurando que la vista inactiva esté oculta y la activa se muestre */
 .auth-view {
-    display: none; /* Oculta todas las vistas por defecto */
+    display: none;
+    padding: 0 10px; /* Padding interno */
 }
-
 .auth-view.active {
-    display: block; /* Muestra solo la vista activa */
+    display: block;
 }
 
-/* -------------------------------------- */
-/* INPUTS Y CAMPOS */
-/* -------------------------------------- */
+.modal input,
+.modal select {
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+    width: 100%;
+    border: 1px solid var(--color-border-input); /* Borde gris suave */
+    color: var(--color-text-dark);
+}
+
+/* Inputs con Icono (si usas la estructura HTML que te di) */
 .input-icon-group {
     position: relative;
     margin-bottom: 15px;
 }
 
-.input-icon-group .icon {
+.input-icon-group .icon,
+.password-group .toggle-password {
     position: absolute;
-    left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--color-text-light); /* Íconos en gris */
-    font-size: 1.1rem;
-}
-
-/* Estilo base para todos los inputs y selects */
-input[type="text"], 
-input[type="email"], 
-input[type="password"],
-select {
-    width: 100%;
-    padding: 12px 12px 12px 45px; /* Padding extra a la izquierda para el ícono */
-    border: 1px solid var(--color-border); /* Borde gris */
-    border-radius: 5px;
-    box-sizing: border-box;
+    color: var(--color-text-light);
     font-size: 1rem;
-    color: var(--color-text-dark); /* Texto del input en gris oscuro/negro */
-}
-select {
-    /* Ajuste específico para el select sin el ícono si no usas librerías */
-    appearance: none; /* Oculta la flecha por defecto */
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="gray"><polygon points="0,3 10,3 5,8"/></svg>') no-repeat right 15px center;
-    background-size: 8px 8px;
 }
 
-input::placeholder {
-    color: var(--color-text-light); /* Placeholder en gris claro */
+.input-icon-group .icon {
+    left: 15px;
 }
-
-/* Ojo para mostrar contraseña */
+.input-icon-group input,
+.input-icon-group select {
+    padding-left: 45px; /* Espacio para el ícono */
+}
 .password-group .toggle-password {
     right: 15px;
-    left: auto; /* Anula el left del .icon */
-    color: var(--color-text-light);
     cursor: pointer;
 }
 
-
-/* -------------------------------------- */
-/* BOTONES */
-/* -------------------------------------- */
-.btn-action {
-    width: 100%;
-    padding: 12px 20px;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    text-transform: uppercase;
-    transition: background-color 0.2s;
+/* Input focus (naranja) */
+.modal input:focus,
+.modal select:focus {
+    border: 2px solid var(--color-primary) !important;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 92, 0, 0.4);
+    transition: 0.2s;
 }
 
-/* Botón Primario (ENTRAR / CREAR CUENTA) */
-.btn-action.btn-primary {
-    background-color: var(--color-primary); /* Fondo naranja */
-    color: white; /* Letras blancas */
-    box-shadow: 0 4px 10px rgba(255, 92, 0, 0.4);
-}
-.btn-action.btn-primary:hover {
-    background-color: #cc4a00; /* Naranja más oscuro al pasar el ratón */
-}
-
-/* -------------------------------------- */
-/* ENLACES Y TEXTO SECUNDARIO */
-/* -------------------------------------- */
-
-/* Texto "¿No tienes cuenta? Regístrate aquí" */
+/* Enlaces de cambio de vista (Regístrate aquí / Inicia sesión) */
 .switch-option {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
     font-size: 0.95rem;
-    color: var(--color-text-dark); /* Texto principal en gris oscuro/negro */
+    color: var(--color-text-dark);
 }
 
-/* El enlace para alternar y los términos */
 .switch-link {
     color: var(--color-primary); /* Enlace naranja */
     font-weight: 600;
-    cursor: pointer;
     text-decoration: none;
+    cursor: pointer;
 }
 .switch-link:hover {
-    text-decoration: underline; /* Subrayado al pasar el ratón */
+    text-decoration: underline;
 }
 
-/* Estilos para la barra de términos y condiciones */
-.terms-bar {
-    display: flex;
-    align-items: center;
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: var(--color-text-dark);
+/* Botón de cierre */
+.btn-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.8rem;
+    color: var(--color-text-light);
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 5px;
 }
-.terms-bar input[type="checkbox"] {
-    width: auto;
-    margin-right: 10px;
-    padding: 0;
-}
-.terms-bar label {
-    color: var(--color-text-dark);
+
+.btn-close:hover {
+    color: var(--color-danger);
 }
