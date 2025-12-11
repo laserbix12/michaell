@@ -3,52 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto | Mi Rincón de Baloncesto</title>
+    <title>Contacto | Baloncesto Total</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <header class="header">
-        <div class="logo"> Baloncesto Total</div>
+        <div class="logo">Baloncesto Total</div>
         <nav class="nav">
             <a href="index.html">Inicio</a>
             <a href="Iniciar sesión.html">Iniciar sesión</a>
             <a href="Blog.html">Blog</a>
             <a href="contacto.html">Contacto</a>
             <a href="portafolio.html">portafolio</a>
-            </nav>
+        </nav>
     </header>
 
     <main>
         <section class="content-section">
-            <h2>Unete y Comparte tu Pasión</h2>
+            <h2>Únete y Comparte tu Pasión</h2>
             
-            <img 
-                src="https://img.freepik.com/vector-gratis/baloncesto-deporte-juego-paisaje-dibujos-animados_18591-51447.jpg?semt=ais_incoming&w=740&q=80" 
-                alt="Balón de baloncesto sobre la cancha" 
-                class="contact-image"
-                style="width: 100%; max-width: 800px; display: block; margin: 0 auto 2rem; border-radius: 8px; border: 3px solid var(--color-primary);"
-            >
+            <p class="section-description">
+                ¡Echa un vistazo a la energía de nuestra comunidad! Regístrate abajo para ser parte de ella.
+            </p>
+
+            <div class="contact-gallery">
+                <img src="https://thumbs.dreamstime.com/b/cancha-de-baloncesto-al-atardecer-ai-generativo-321978584.jpg" alt="Cancha de baloncesto al atardecer">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSozVeqQpcMPbYG7MiNwGI8m91AQjoGxtxUKA&s" alt="Balón de baloncesto de cerca">
+                <img src="https://media.gettyimages.com/id/200154705-001/es/foto/basketball-player-shooting-from-free-throw-line-rear-view.jpg?s=612x612&w=gi&k=20&c=YVr92RFdMrd_zkUo26wRqAlpSKQP3xAdhXA7WwASd6g=" alt="Silueta de un jugador encestando">
+                <img src="https://plus.unsplash.com/premium_photo-1661872981731-54199736e0e1?w=600&h=400&fit=crop" alt="Entrenador dando instrucciones">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKaEN7koplBD8y_lfmA7H6zkc3qrWcEo7KyQ&s" alt="Pizarra de estrategias o estadísticas">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaIVlxH0oA0IRxgCop4pVpSkdn2P4l7SLdMQ&s" alt="Aficionados celebrando un punto">
+            </div>
+            
             <div class="form-container">
                 <p>
                     Queremos construir la mejor comunidad de baloncesto. 
                     Ingresa tus datos a continuación para registrarte y usando nuestra herramienta, 
-                    puedes gestionar tus entradas y validar nuestro sistema de registro
+                    puedes gestionar tus entradas y validar nuestro sistema de registro.
                 </p>
                 
                 <div class="input-group">
                     <label for="nombre">Nombre Completo:</label>
-                    <input type="text" id="nombre">
+                    <input type="text" id="nombre" placeholder="Ej: LeBron James" required>
                     <div id="error-nombre" class="error"></div> 
                 </div>
                 <div class="input-group">
                     <label for="email">Email de Contacto:</label>
-                    <input type="text" id="email">
+                    <input type="email" id="email" placeholder="correo@baloncestototal.com" required>
                     <div id="error-email" class="error"></div> 
                 </div>
                 <div class="input-group">
                     <label for="edad">Años de Fanático:</label>
-                    <input type="number" id="edad" placeholder="¿Cuántos años llevas siguiendo el baloncesto?">
+                    <input type="number" id="edad" placeholder="¿Cuántos años llevas siguiendo el baloncesto?" required min="1" max="100">
                     <div id="error-edad" class="error"></div> 
                 </div>
                 
@@ -63,14 +70,14 @@
                 </div>
             </div>
             
-            <a href="index.html" class="back-to-top" style="display:block; text-align:center; margin-top:2rem;">Volver al Inicio ↑</a>
+            <a href="index.html" class="back-to-top">Volver al Inicio ↑</a>
         </section>
         
     </main>
     
     <div class="modal hidden">
         <button class="btn-close">&times;</button> 
-        <h3>unete a la Comunidad Baloncesto!</h3>
+        <h3>Únete a la Comunidad Baloncesto!</h3>
         <p>Regístrate para recibir las últimas noticias y análisis en tu correo</p>
         <form>
             <input type="text" placeholder="Tu Nombre">

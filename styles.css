@@ -305,3 +305,926 @@ h2 {
     color: var(--color-light);
     font-size: 1rem;
 }
+/* ========================================================== */
+/* 🏀 7/8. ESTILOS DE AUTENTICACIÓN (INICIAR SESIÓN / REGISTRO) */
+/* ========================================================== */
+
+.auth-page-container {
+    padding: 40px 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Para centrar verticalmente en la página */
+}
+
+/* Contenedor del formulario central, similar al modal */
+.auth-form-wrapper {
+    background-color: var(--color-light);
+    width: 90%;
+    max-width: 450px;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid var(--color-primary);
+}
+
+.auth-form-wrapper h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: none;
+    width: 100%;
+}
+
+/* --- Estilos de Pestañas (Tabs) --- */
+.tab-container {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid var(--color-gray-soft);
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    flex-grow: 1;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-text-light);
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: color 0.2s;
+    position: relative;
+}
+
+.tab-btn:hover {
+    color: var(--color-primary);
+}
+
+.tab-btn.active {
+    color: var(--color-primary);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* Asegura que se superponga al borde inferior del contenedor */
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-primary);
+}
+
+/* --- Estilos de Campos de Formulario con Iconos --- */
+.input-field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-field input,
+.input-field select {
+    width: 100%;
+    padding: 12px 15px 12px 40px; /* Espacio extra a la izquierda para el icono */
+    border: 1px solid var(--color-border-input);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Mantiene el foco naranja de las variables base */
+.input-field input:focus,
+.input-field select:focus {
+    border: 2px solid var(--color-primary) !important;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 92, 0, 0.3);
+}
+
+.input-field .icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+}
+
+/* Icono de visibilidad (Ojo) a la derecha */
+.input-field .icon.eye {
+    left: auto;
+    right: 15px;
+    cursor: pointer;
+}
+
+/* Checkbox para Términos y Condiciones */
+.terms-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0 25px 0;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.terms-bar a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.terms-bar input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--color-primary); /* Colorea el checkbox */
+}
+
+/* Botón de acción grande */
+.btn-auth {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.btn-auth:hover {
+    background-color: #e64a00;
+}
+
+/* Enlace de 'No tienes cuenta' */
+.switch-auth {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+.switch-auth a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+.switch-auth a:hover {
+    text-decoration: underline;
+}
+/* ========================================================== */
+/* 🏀 8. ESTILOS ESPECÍFICOS DEL MODAL (Ajustando a Auth Style) */
+/* ========================================================== */
+
+/* Modificación para que el modal se vea como la caja de autenticación */
+.modal {
+    /* Manteniendo los estilos base de la Sección 5 */
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px; /* Aumentamos el ancho para que quepan los campos */
+    background-color: var(--color-light);
+    padding: 30px; /* Aumentamos el padding para la estructura interna */
+    border-radius: 12px;
+    z-index: 200;
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--color-primary); /* Borde naranja */
+    padding-top: 60px; /* Espacio para el botón de cerrar */
+}
+
+/* --- TABS dentro del Modal (Similar a .tab-container) --- */
+.auth-tabs {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid var(--color-gray-soft);
+    margin-bottom: 25px;
+    margin-left: -30px; /* Expandir a los bordes del modal */
+    margin-right: -30px;
+}
+
+.auth-tab-item {
+    flex-grow: 1;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-text-light);
+    cursor: pointer;
+    transition: color 0.2s;
+    position: relative;
+}
+
+.auth-tab-item:hover {
+    color: var(--color-primary);
+}
+
+.auth-tab-item.active {
+    color: var(--color-primary);
+}
+
+.auth-tab-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; 
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-primary);
+}
+
+/* --- Contenido del Modal --- */
+.auth-content {
+    text-align: left;
+}
+.auth-view.active {
+    display: block;
+}
+.auth-view {
+    display: none;
+}
+
+/* --- Estilos de Campos de Input con Icono (para el modal) --- */
+.input-icon-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon-group input,
+.input-icon-group select {
+    width: 100%;
+    padding: 12px 15px 12px 40px; /* Espacio extra a la izquierda para el icono */
+    border: 1px solid var(--color-border-input);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-icon-group input:focus,
+.input-icon-group select:focus {
+    border: 2px solid var(--color-primary) !important;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 92, 0, 0.3);
+}
+
+.input-icon-group .icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    z-index: 1; /* Asegura que el ícono esté sobre el input/select */
+}
+
+/* Icono de visibilidad (Ojo) a la derecha */
+.password-group .toggle-password {
+    position: absolute;
+    right: 15px;
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-light);
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+/* Botones de acción del formulario */
+.auth-view .btn-action {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Enlace de cambio (Regístrate aquí / Inicia sesión) */
+.switch-option {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+.switch-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+.switch-link:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para los campos simples del registro que no tienen icono (ajustar padding) */
+#registerView input[type="text"],
+#registerView input[type="email"],
+#registerView input[type="password"] {
+    padding: 12px 15px; /* Quitar el espacio extra de la izquierda */
+    margin-bottom: 15px;
+    width: 100%;
+    border: 1px solid var(--color-border-input);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+/* ========================================================== */
+/* 🏀 9. ESTILOS DE LA PÁGINA DE BLOG (Blog.html) */
+/* ========================================================== */
+
+/* --- Estilo del Artículo Individual --- */
+.blog-post {
+    max-width: 850px; /* Ancho máximo para el contenido del blog */
+    margin: 0 auto 50px auto;
+    background-color: var(--color-light);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.blog-post h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 5px;
+}
+
+.blog-post h4 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-left: 5px solid var(--color-primary);
+    padding-left: 10px;
+}
+
+.post-meta {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+/* --- Imagen del Post --- */
+.post-image {
+    width: 100%; /* Asegura que la imagen ocupe el ancho del contenedor del post */
+    max-height: 450px; /* Limita la altura para que no se vea gigantesca */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+    border-radius: 8px;
+    margin-bottom: 30px;
+    border: 1px solid var(--color-gray-soft);
+}
+
+.blog-post p, .blog-post ul {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* --- Lista con Íconos (Reutilizamos el estilo de Sección 4) --- */
+.blog-post ul {
+    list-style: none;
+    padding: 0;
+    max-width: 100%; /* Ocupa el ancho completo del blog post */
+    margin-left: 20px; /* Mueve la lista un poco hacia la derecha */
+}
+
+.blog-post ul li {
+    padding-left: 1.8rem;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.blog-post ul li::before {
+    content: "🏀"; 
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-size: 1rem;
+}
+
+/* --- Botón de Suscripción --- */
+.blog-post .btn-open {
+    display: block;
+    width: fit-content;
+    margin: 30px auto; /* Centrar el botón */
+}
+
+/* --- Enlace "Volver al inicio" --- */
+.back-to-top {
+    display: block;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1rem;
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: bold;
+}
+.back-to-top:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+/* ... (Secciones 1 a 10) ... */
+
+/* ========================================================== */
+/* 🏀 11. ESTILOS DE LA PÁGINA DE PORTAFOLIO (portafolio.html) */
+/* ========================================================== */
+
+/* Estilo para la descripción bajo el título */
+.section-description {
+    text-align: center;
+    max-width: 800px;
+    margin: -15px auto 40px auto;
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+}
+
+/* Contenedor principal de la cuadrícula */
+.project-grid {
+    display: grid;
+    /* Esto crea columnas de 300px mínimo, y ajusta automáticamente 2 o 3 columnas 
+       dependiendo del tamaño de la pantalla, manteniendo las 6 imágenes ajustadas. */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+/* Estilo de cada tarjeta/proyecto */
+.project-card {
+    background-color: var(--color-light);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column; 
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen del proyecto */
+.project-image {
+    width: 100%;
+    height: 220px; /* Altura fija para que todas las imágenes sean iguales */
+    object-fit: cover; 
+    border-bottom: 3px solid var(--color-primary);
+}
+
+/* Contenido de texto de la tarjeta */
+.card-content {
+    padding: 20px;
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+}
+/* ... (Añadir en la sección de estilos de contacto de tu styles.css) ... */
+
+/* Estilos de la Galería de Contacto */
+.contact-gallery {
+    display: grid;
+    /* Crea 3 columnas iguales en pantallas grandes y se ajusta a 2 o 1 en móvil */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+    margin: 0 auto 40px auto;
+    max-width: 1000px;
+}
+
+.contact-gallery img {
+    /* Claves para el ajuste: */
+    width: 100%; 
+    height: 180px; /* Todas las imágenes con la misma altura */
+    object-fit: cover; /* Ajusta la imagen al contenedor sin distorsión */
+    
+    /* Estilos visuales: */
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.contact-gallery img:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 92, 0, 0.5); 
+}
+/* ========================================================== */
+/* ESTILOS DE LA MODAL ÚNICA DE AUTENTICACIÓN (Login/Registro) */
+/* ========================================================== */
+
+/* Estilos de la ventana Modal */
+.auth-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-light); /* Fondo Blanco */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    width: 90%;
+    max-width: 450px;
+    padding: 30px;
+}
+
+/* Encabezado con pestañas */
+.auth-tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.auth-tabs .tab-button {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    padding: 10px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: color 0.3s;
+    /* Línea de selección */
+    border-bottom: 3px solid transparent; 
+    margin-bottom: -2px; /* Ajuste para que la línea no se vea doble */
+}
+
+/* Pestaña ACTIVA */
+.auth-tabs .tab-button.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary); /* Línea de color naranja */
+}
+
+/* Botón de cerrar (X) */
+.auth-close {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-dark);
+}
+
+/* Título de la vista (Iniciar Sesión / Crear Cuenta) */
+.view-title {
+    font-size: 2rem;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Contenido de la Vista */
+.auth-view {
+    padding: 0 10px;
+}
+.auth-view.active {
+    display: block;
+}
+.auth-view.hidden {
+    display: none;
+}
+
+/* Grupos de entrada */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group label {
+    display: none; /* Ocultamos etiquetas si usamos placeholder fuerte */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+/* Botón ENTRAR/REGISTRARME */
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Texto de cambio de vista */
+.switch-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.switch-text a {
+    color: var(--color-primary);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Ocultar el modal por defecto */
+.hidden {
+    display: none !important;
+}
+
+/* Overlay para oscurecer el fondo */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1999;
+}
+
+/* Estilos de la página de Login */
+.login-page-main {
+    text-align: center;
+    padding: 80px 20px;
+}
+.welcome-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e6ffe6;
+    border: 1px solid #c0ffc0;
+    padding: 20px;
+    border-radius: 8px;
+}
+.welcome-actions {
+    margin-top: 15px;
+}
+.btn-danger-outline {
+    background-color: transparent;
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-left: 10px;
+}
+.btn-danger-outline:hover {
+    background-color: #dc3545;
+    color: var(--color-light);
+}
+
+/* Asegúrate de que los estilos básicos de .btn-action y .btn-primary existan para el botón ENTRAR */
+/* Ejemplo: */
+.btn-action {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+}
+.btn-primary:hover {
+    background-color: #e55300;
+}
+/* ==================================== */
+/* 0. CONFIGURACIÓN BASE Y TIPOGRAFÍA */
+/* ==================================== */
+:root {
+    --color-primary: #ff5722; /* Naranja Baloncesto */
+    --color-secondary: #00bcd4; /* Azul Turquesa */
+    --color-dark: #212121;
+    --color-light: #f5f5f5;
+    --color-text: #333;
+    --font-family: 'Arial', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: var(--color-light);
+    color: var(--color-text);
+}
+
+.section-padding {
+    padding: 60px 5%;
+}
+
+/* ==================================== */
+/* 1. HEADER Y NAVEGACIÓN */
+/* ==================================== */
+.header {
+    background-color: var(--color-dark);
+    color: white;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 5px 0;
+    transition: color 0.3s;
+}
+
+.nav a:hover, .nav a.active {
+    color: var(--color-primary);
+}
+
+/* ==================================== */
+/* 2. SECCIÓN HERO (Fondo, Texto y Centrado) */
+/* ==================================== */
+.hero {
+    height: 85vh; /* Altura generosa para impacto visual */
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-background-image {
+    /* La imagen de fondo para el HERO */
+    background: url('https://images.unsplash.com/photo-1546519638-68e14620f4b3') no-repeat center center/cover;
+}
+
+.hero::before {
+    /* Overlay oscuro para mejorar la legibilidad del texto */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Asegura que el texto esté sobre el overlay */
+    width: 80%;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1.3em;
+}
+
+/* ==================================== */
+/* 3. GRID DE CONTENIDO Y TARJETAS */
+/* ==================================== */
+.content-grid {
+    display: grid;
+    /* 3 columnas en escritorio, que se ajustarán en móvil */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px;
+    background-color: white;
+}
+
+.info-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ESTILO CLAVE PARA LAS IMÁGENES DE LAS TARJETAS */
+.card-img {
+    width: 100%;
+    height: 200px; /* Altura fija para uniformidad visual */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin estirarse */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.read-more {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* ==================================== */
+/* 4. CTA Y FOOTER */
+/* ==================================== */
+.cta-section {
+    text-align: center;
+    color: white;
+}
+
+.background-dark {
+    background-color: var(--color-dark);
+}
+
+.cta-content h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.btn-action, .btn-primary, .btn-secondary, .btn-large {
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-dark);
+}
+
+.btn-secondary:hover {
+    background-color: #00a4b7;
+}
+
+/* FOOTER */
+.footer {
+    background-color: #333;
+    color: #ccc;
+    padding: 30px 5%;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+
+.social-links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+/* ... (El resto de tus estilos para .form-container, etc.) ... */
+
+/* ... (Resto de estilos de .card-content, h3, p, y .btn-project) ... */

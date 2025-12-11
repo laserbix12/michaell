@@ -3,108 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Mi Rincón de Baloncesto</title>
+    <title>Inicio | Baloncesto Total</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
 </head>
 <body>
 
     <header class="header">
-        <div class="logo"> Baloncesto Total</div>
+        <div class="logo">🏀 Baloncesto Total</div>
         <nav class="nav">
-            <a href="index.html">Inicio</a>
-            <a href="Iniciar sesión.html">Iniciar sesión</a>
-      
+            <a href="index.html" class="active">Inicio</a>
+            <a href="#" id="loginLinkNav" data-view="login">Iniciar sesión</a> 
+            <a href="dashboard.html" id="dashboardLinkNav" class="hidden">Dashboard</a> 
+            <a href="#" id="logoutLinkNav" class="hidden">Cerrar Sesión</a> 
             <a href="Blog.html">Blog</a>
             <a href="contacto.html">Contacto</a>
+            <a href="portafolio.html">Portafolio</a>
         </nav>
     </header>
 
     <main>
         
-        <section id="inicio" class="hero">
-            <h1>La Pasión Vive en la Cancha</h1>
-            <p>Descubre la historia, las reglas y el legado de uno de los deportes más emocionantes del mundo.</p>
-            <button class="btn-open">¡subscribete!</button>
+        <section id="inicio" class="hero section-padding">
+            <div class="hero-content">
+                <div id="welcomeArea" class="hidden">
+                    <h1 id="welcomeMessage">¡Bienvenido de vuelta!</h1>
+                    <p class="hero-subtitle" id="sessionInfo">Prepárate para la acción. Consulta tus estadísticas.</p>
+                    <a href="dashboard.html" class="btn-action btn-secondary btn-large">Ir al Dashboard</a>
+                </div>
 
-            <!-- Imagen principal -->
-            <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b" 
-                 alt="Jugador haciendo una clavada"
-                 class="responsive-img hero-img">
+                <div id="loginArea">
+                    <h1>La Pasión Vive en la Cancha</h1>
+                    <p class="hero-subtitle">Descubre la historia, las reglas y el legado de uno de los deportes más emocionantes del mundo.</p>
+                    <button id="openAuthModal1" data-view="register" class="btn-action btn-primary btn-large">¡Regístrate y Domina la Cancha!</button>
+                </div>
+            </div>
+            <img src="https://images.unsplash.com/photo-1546519638-68e14620f4b3" 
+                alt="Baloncesto en el aro al atardecer"
+                class="hero-img">
+        </section>
+        
+        <section class="content-grid section-padding">
+            
+            <article class="info-card card-shadow">
+                <img src="https://images.unsplash.com/photo-1546429328-944e82e99f5d" 
+                    alt="Jugador en movimiento ofensivo"
+                    class="card-img">
+                <div class="card-content">
+                    <h2>Entrenamientos Pro</h2>
+                    <p>Técnicas y ejercicios avanzados para mejorar tu dribbling y tiro de media distancia.</p>
+                    <a href="#" class="read-more">Ver Rutinas &rarr;</a>
+                </div>
+            </article>
+
+            <article class="info-card card-shadow">
+                <img src="https://images.unsplash.com/photo-1506443432602-ac2415170381"
+                    alt="Tribunas de estadio llenas"
+                    class="card-img">
+                <div class="card-content">
+                    <h2>Ligas y Torneos</h2>
+                    <p>Cobertura de las principales ligas del mundo: NBA, Euroliga y Ligas locales.</p>
+                    <a href="#" class="read-more">Ver Calendario &rarr;</a>
+                </div>
+            </article>
+
+            <article class="info-card card-shadow">
+                <img src="https://images.unsplash.com/photo-1551028150-64b9f2986e10"
+                    alt="Balón de baloncesto retro en la cancha"
+                    class="card-img">
+                <div class="card-content">
+                    <h2>Historia Clave</h2>
+                    <p>Un viaje por los momentos más icónicos y los orígenes del deporte en 1891.</p>
+                    <a href="#" class="read-more">Leer Historia &rarr;</a>
+                </div>
+            </article>
+
+            <article class="info-card card-shadow">
+                <img src="https://images.unsplash.com/photo-1512401614749-0db7643b1842"
+                    alt="Zapatillas de baloncesto en primer plano"
+                    class="card-img">
+                <div class="card-content">
+                    <h2>Equipo Esencial</h2>
+                    <p>Análisis de las mejores zapatillas, balones y accesorios para rendir al máximo nivel.</p>
+                    <a href="#" class="read-more">Ver Reviews &rarr;</a>
+                </div>
+            </article>
+            
+            <article class="info-card card-shadow">
+                <img src="https://images.unsplash.com/photo-1515053158066-f13887c53d91"
+                    alt="Aro de baloncesto y red"
+                    class="card-img">
+                <div class="card-content">
+                    <h2>Reglas y Arbitraje</h2>
+                    <p>Explicación detallada de las reglas FIBA y NBA, faltas y uso del reloj de 24 segundos.</p>
+                    <a href="#" class="read-more">Ver Guía &rarr;</a>
+                </div>
+            </article>
+            
+            <article class="info-card card-shadow">
+                <img src="https://images.unsplash.com/photo-1544605151-5cf5d7c35d90"
+                    alt="Estrategia dibujada en pizarra"
+                    class="card-img">
+                <div class="card-content">
+                    <h2>Táctica y Estrategia</h2>
+                    <p>Análisis de jugadas ofensivas y defensivas, y cómo leer la defensa del rival.</p>
+                    <a href="#" class="read-more">Ver Tácticas &rarr;</a>
+                </div>
+            </article>
+
         </section>
 
-        <!-- SECCIÓN: Historia del Baloncesto -->
-        <section class="info-section">
-            <h2>Historia del Baloncesto</h2>
-            <img src="https://images.unsplash.com/photo-1519861531473-9200262188bf" 
-                 alt="Balón de baloncesto en la cancha"
-                 class="responsive-img">
-            <p>
-                El baloncesto fue creado en 1891 por James Naismith como una actividad deportiva para el invierno.
-                Con el paso del tiempo, se convirtió en uno de los deportes más populares del mundo.
-            </p>
-        </section>
-
-        <!-- SECCIÓN: Reglas Básicas -->
-        <section class="info-section">
-            <h2>Reglas Básicas del Juego</h2>
-            <img src="https://images.unsplash.com/photo-1504450758481-7338eba7524a"
-                 alt="Aro de baloncesto"
-                 class="responsive-img">
-            <ul>
-                <li>El juego se divide en 4 cuartos.</li>
-                <li>Un equipo tiene 5 jugadores en la cancha.</li>
-                <li>Los tiros valen 1, 2 o 3 puntos.</li>
-                <li>No se puede caminar sin botar el balón.</li>
-                <li>Puedes atacar la canasta con 24 segundos de posesión.</li>
-            </ul>
-        </section>
-
-        <!-- SECCIÓN: Estadísticas -->
-        <section class="info-section">
-            <h2>Estadísticas Más Importantes</h2>
-            <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d"
-                 alt="Partido de baloncesto profesional"
-                 class="responsive-img">
-            <p>Algunas estadísticas esenciales que se analizan en cada partido:</p>
-            <ul>
-                <li><strong>Puntos:</strong> Total anotado.</li>
-                <li><strong>Asistencias:</strong> Pases que terminan en canasta.</li>
-                <li><strong>Rebotes:</strong> Balones recuperados.</li>
-                <li><strong>Robos:</strong> Balones arrebatados.</li>
-                <li><strong>Bloqueos:</strong> Tiros defendidos.</li>
-            </ul>
-        </section>
-
-        <!-- SECCIÓN: Jugadores Legendarios -->
-        <section class="info-section">
-            <h2>Jugadores Legendarios</h2>
+        <section class="legend-section section-padding background-dark">
+            <div class="legend-content">
+                <h2>Conoce a los Jugadores Legendarios</h2>
+                <p>Las estrellas que definieron el deporte y dejaron un legado imborrable en la historia del baloncesto.</p>
+                <ul class="legend-list">
+                    <li><strong>Michael Jordan:</strong> El GOAT.</li>
+                    <li><strong>LeBron James:</strong> Dominio intergeneracional.</li>
+                    <li><strong>Kobe Bryant:</strong> El espíritu de la Mamba.</li>
+                    <li><strong>Stephen Curry:</strong> El mejor tirador de la historia.</li>
+                    <li><strong>Shaquille O’Neal:</strong> El pívot más dominante.</li>
+                </ul>
+            </div>
             <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e"
-                 alt="Balón con fondo oscuro"
-                 class="responsive-img">
-            <ul>
-                <li><strong>Michael Jordan:</strong> La leyenda más grande.</li>
-                <li><strong>LeBron James:</strong> Dominante en diferentes épocas.</li>
-                <li><strong>Kobe Bryant:</strong> El espíritu de la Mamba.</li>
-                <li><strong>Stephen Curry:</strong> Revolucionó el triple.</li>
-                <li><strong>Shaquille O’Neal:</strong> Uno de los pívots más fuertes.</li>
-            </ul>
+                alt="Balón con fondo oscuro"
+                class="legend-img">
+        </section>
+
+        <section class="cta-section section-padding">
+            <h2>¡No te pierdas de nada!</h2>
+            <p>Únete a nuestra comunidad para acceder a artículos exclusivos, entrevistas y más contenido premium.</p>
+            <button id="openAuthModal2" data-view="register" class="btn-action btn-secondary btn-large">Regístrate Ahora</button>
         </section>
 
     </main>
     
-    <div class="modal hidden">
-        <button class="btn-close">&times;</button> 
-        <h3>¡Únete a la Comunidad Baloncesto!</h3>
-        <p>Regístrate para recibir las últimas noticias y análisis en tu correo.</p>
-        <form>
-            <input type="text" placeholder="Tu Nombre">
-            <input type="email" placeholder="Tu Email">
-            <button type="submit" class="btn-action">Suscribirme</button>
-        </form>
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>© 2024 Baloncesto Total</strong> | Pasión por el Juego</p>
+            <div class="social-links">
+                <a href="#">Facebook</a> |
+                <a href="#">Twitter</a> |
+                <a href="#">Instagram</a>
+            </div>
+            <p>Contacto: info@baloncestototal.com</p>
+        </div>
+    </footer>
+
+    <div id="authModal" class="modal hidden">
+        <button class="auth-close btn-close">&times;</button>
+        <div class="auth-tabs">
+            <button id="switchToLogin" class="active">Iniciar Sesión</button>
+            <button id="switchToRegister">Registrarse</button>
+        </div>
+        <div id="loginView" class="auth-view active">
+            <form id="loginForm">
+                <h3>Iniciar Sesión</h3>
+                <input type="email" id="loginEmail" placeholder="Correo Electrónico" required>
+                <input type="password" id="loginPassword" placeholder="Contraseña" required>
+                <label>
+                    <input type="checkbox" id="loginTerms" required> Acepto los términos
+                </label>
+                <button type="submit" class="btn-action btn-primary">Entrar</button>
+                <p>¿No tienes cuenta? <a href="#" id="switchToRegisterLink">Regístrate aquí</a></p>
+            </form>
+        </div>
+        <div id="registerView" class="auth-view hidden">
+            <form id="registerForm">
+                <h3>Crear Cuenta</h3>
+                <input type="text" id="regName" placeholder="Nombre Completo" required>
+                <input type="email" id="regEmail" placeholder="Correo Electrónico" required>
+                <input type="password" id="regPassword" placeholder="Contraseña" required>
+                <input type="password" id="regConfirmPassword" placeholder="Confirmar Contraseña" required>
+                <button type="submit" class="btn-action btn-primary">Registrarme</button>
+                <p>¿Ya tienes cuenta? <a href="#" id="switchToLoginLink">Inicia sesión aquí</a></p>
+            </form>
+        </div>
     </div>
-
+    
     <div class="overlay hidden"></div> 
-
     <script src="script.js"></script>
-</body>
+
+    </body>
 </html>

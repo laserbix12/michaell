@@ -1,275 +1,246 @@
 /* ====================================================================
-   SCRIPT COMPLETO (Autenticación, Sesión, CRUD, Dashboard)
+   1. DECLARACIÓN DE ELEMENTOS DEL DOM
    ==================================================================== */
 
-// ====================================================================
-// 1. OBTENCIÓN Y DECLARACIÓN DE ELEMENTOS DEL DOM (GLOBAL UNIFICADO)
-// ====================================================================
-
-// Elementos de la Modal de Autenticación
+// Botones para abrir el modal (ej: en index.html, Iniciar sesión.html)
 const openAuthBtns = document.querySelectorAll('[id^="openAuthModal"]');
+
+// Elementos de la Modal de AUTENTICACIÓN
 const authModal = document.getElementById('authModal');
 const closeAuthBtn = document.querySelector('.auth-close');
 const overlay = document.querySelector('.overlay');
 
-// Vistas dentro de la Modal
+// Elementos de la Modal de SUSCRIPCIÓN (NUEVO)
+const subscriptionModal = document.getElementById('subscriptionModal');
+const openSubscriptionBtns = document.querySelectorAll('#openModalBtn, #openModalBtn2'); // Botones de suscripción
+const closeSubscriptionBtn = document.getElementById('closeModalBtn'); // Botón de cerrar de la modal de suscripción
+
+
+// Vistas dentro de la Modal de Autenticación
 const loginView = document.getElementById('loginView');
 const registerView = document.getElementById('registerView');
 
-// Enlaces para alternar dentro del formulario
-const switchToRegisterLink = document.getElementById('switchToRegister');
-const switchToLoginLink = document.getElementById('switchToLogin');
+// Pestañas y enlaces de cambio de vista (Autenticación)
+const switchToRegisterTab = document.getElementById('switchToRegister');
+const switchToLoginTab = document.getElementById('switchToLogin');
+const switchToRegisterLink = document.getElementById('switchToRegisterLink');
+const switchToLoginLink = document.getElementById('switchToLoginLink');
 
-// Elementos de las Pestañas (Añadidos en la corrección anterior)
-const authTabItems = document.querySelectorAll('.auth-tab-item');
-const tabLogin = document.getElementById('tabLogin');
-const tabRegister = document.getElementById('tabRegister');
-
-// Formularios y Campos
+// Formularios
 const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+
+// Inputs de Login
 const loginEmailInput = document.getElementById("loginEmail");
 const loginPasswordInput = document.getElementById("loginPassword");
 const loginTermsInput = document.getElementById("loginTerms");
 
-const registerForm = document.getElementById("registerForm");
+// Inputs de Registro
 const regNameInput = document.getElementById("regName");
 const regEmailInput = document.getElementById("regEmail");
 const regPasswordInput = document.getElementById("regPassword");
 const regConfirmPasswordInput = document.getElementById("regConfirmPassword");
 
-// Elementos del Dashboard y Sesión
+// Elementos de la Interfaz (Index y Dashboard)
 const welcomeArea = document.getElementById("welcomeArea");
-const loginArea = document.getElementById("loginArea");
+const loginArea = document.getElementById("loginArea"); // Área que contiene el botón de abrir modal
 const dashboardContent = document.getElementById("dashboardContent");
 const noSessionMessage = document.getElementById("noSessionMessage");
 const usuariosRegistradosDiv = document.getElementById("usuariosRegistrados");
-const btnGuardar = document.getElementById("btnGuardar");
-const btnVer = document.getElementById("btnVer");
-const btnBorrar = document.getElementById("btnBorrar");
-const btnLimpiarDashboard = document.getElementById("btnLimpiarDashboard");
 const cerrarSesionBtn = document.getElementById("cerrarSesionBtn");
 const eliminarCuentaBtn = document.getElementById("eliminarCuentaBtn");
 
+// Elementos de la Barra de Navegación (para control de sesión global)
+const loginLinkNav = document.getElementById("loginLinkNav");
+const dashboardLinkNav = document.getElementById("dashboardLinkNav");
+const logoutLinkNav = document.getElementById("logoutLinkNav");
 
-// ====================================================================
-// 2. FUNCIONES DE CONTROL DE LA MODAL (AJUSTADAS PARA PESTAÑAS)
-// ====================================================================
 
-/**
- * Muestra la modal y la vista de inicio de sesión o registro.
- * @param {string} viewToShow - 'login' o 'register'.
- */
+/* ====================================================================
+   2. FUNCIONALIDAD DE LAS MODALES (Abrir, Cerrar, Cambiar Vista)
+   ==================================================================== */
+
+// 2.1. Modal de Autenticación (Login/Register)
+const switchView = (targetView) => {
+    if (!loginView || !registerView) return;
+
+    const tabs = document.querySelectorAll('.auth-tabs button');
+    
+    loginView.classList.remove('active', 'hidden');
+    registerView.classList.remove('active', 'hidden');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    if (targetView === 'login') {
+        registerView.classList.add('hidden');
+    } else if (targetView === 'register') {
+        loginView.classList.add('hidden');
+    }
+
+    if (targetView === 'login') {
+        loginView.classList.add('active');
+        loginView.classList.remove('hidden');
+        if (switchToLoginTab) switchToLoginTab.classList.add('active');
+    } else if (targetView === 'register') {
+        registerView.classList.add('active');
+        registerView.classList.remove('hidden');
+        if (switchToRegisterTab) switchToRegisterTab.classList.add('active');
+    }
+};
+
 const openAuthModal = (viewToShow = 'login') => {
-    if (!authModal) return;
+    if (!authModal || !overlay) return;
 
     authModal.classList.remove('hidden');
     overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
     switchView(viewToShow);
-
-    // Nota: El título (<h3>) se mantiene dentro de cada div.auth-view en el HTML,
-    // por lo que no necesita ser actualizado aquí.
 };
 
-/**
- * Oculta la modal y su fondo.
- */
 const closeAuthModal = () => {
-    if (!authModal) return;
+    if (!authModal || !overlay) return;
     authModal.classList.add('hidden');
-    overlay.classList.add('hidden');
+    // Si la otra modal está abierta, el overlay debe seguir visible
+    if (!subscriptionModal || subscriptionModal.classList.contains('hidden')) {
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    if (loginForm) loginForm.reset();
+    if (registerForm) registerForm.reset();
 };
 
-/**
- * Alterna entre las vistas de Login y Registro (contenido y pestañas).
- * @param {string} targetView - 'login' o 'register'.
- */
-const switchView = (targetView) => {
-    // Es vital chequear si existen las pestañas antes de manipularlas
-    if (!loginView || !registerView) return; 
+// 2.2. Modal de Suscripción (NUEVO)
+const openSubscriptionModal = () => {
+    if (!subscriptionModal || !overlay) return;
 
-    // 1. Alterna las Vistas del Contenido
-    loginView.classList.remove('active');
-    registerView.classList.remove('active');
+    subscriptionModal.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+};
 
-    // 2. Alterna el estado activo de las Pestañas (si existen)
-    if (tabLogin && tabRegister) {
-        tabLogin.classList.remove('active');
-        tabRegister.classList.remove('active');
-
-        if (targetView === 'login') {
-            tabLogin.classList.add('active');
-        } else if (targetView === 'register') {
-            tabRegister.classList.add('active');
-        }
+const closeSubscriptionModal = () => {
+    if (!subscriptionModal || !overlay) return;
+    subscriptionModal.classList.add('hidden');
+    // Si la otra modal está abierta, el overlay debe seguir visible
+    if (!authModal || authModal.classList.contains('hidden')) {
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
     }
-    
-    // 3. Muestra la vista de formulario correcta
-    if (targetView === 'login') {
-        loginView.classList.add('active');
-    } else if (targetView === 'register') {
-        registerView.classList.add('active');
-    }
+    // Opcional: Limpiar el formulario de suscripción
+    const subscriptionForm = subscriptionModal.querySelector('form');
+    if (subscriptionForm) subscriptionForm.reset();
 };
 
 
-// ====================================================================
-// 3. EVENTOS DE LA MODAL (AJUSTADOS PARA PESTAÑAS)
-// ====================================================================
+/* ====================================================================
+   3. EVENTOS DE LAS MODALES Y NAVEGACIÓN
+   ==================================================================== */
 
+// Eventos de la Modal de AUTENTICACIÓN
 if (authModal) {
-    // 1. Eventos para abrir el modal desde el Hero
+    // Abrir modal desde botones con id^="openAuthModal"
     openAuthBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const view = e.currentTarget.getAttribute('data-view');
+            const view = e.currentTarget.getAttribute('data-view') || 'login';
+            closeSubscriptionModal(); // Cierra la de suscripción si está abierta
             openAuthModal(view);
         });
     });
+    
+    // Abrir modal desde el enlace de navegación "Iniciar sesión"
+    if (loginLinkNav) {
+        loginLinkNav.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeSubscriptionModal(); // Cierra la de suscripción si está abierta
+            openAuthModal('login');
+        });
+    }
 
-    // 2. Eventos para cerrar el modal
+    // Cerrar modal de autenticación
     if (closeAuthBtn) closeAuthBtn.addEventListener('click', closeAuthModal);
-    if (overlay) overlay.addEventListener('click', closeAuthModal);
+    
+    // Alternar vistas (Pestañas y enlaces internos)
+    if (switchToRegisterTab) switchToRegisterTab.addEventListener('click', () => switchView('register'));
+    if (switchToLoginTab) switchToLoginTab.addEventListener('click', () => switchView('login'));
+    if (switchToRegisterLink) switchToRegisterLink.addEventListener('click', (e) => { e.preventDefault(); switchView('register'); });
+    if (switchToLoginLink) switchToLoginLink.addEventListener('click', (e) => { e.preventDefault(); switchView('login'); });
+}
 
-    // 3. Eventos para las NUEVAS pestañas (tabLogin, tabRegister)
-    authTabItems.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const view = tab.getAttribute('data-target');
-            switchView(view);
+// Eventos de la Modal de SUSCRIPCIÓN (NUEVO)
+if (subscriptionModal) {
+    // Abrir modal desde botones de suscripción
+    openSubscriptionBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeAuthModal(); // Cierra la de autenticación si está abierta
+            openSubscriptionModal();
         });
     });
 
-    // 4. Eventos para alternar entre las vistas desde los enlaces "Regístrate aquí" / "Inicia sesión"
-    if (switchToRegisterLink) switchToRegisterLink.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        switchView('register');
-    });
-    if (switchToLoginLink) switchToLoginLink.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        switchView('login');
-    });
-
-    // 5. Manejo de la tecla ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !authModal.classList.contains('hidden')) {
-            closeAuthModal();
-        }
-    });
+    // Cerrar modal de suscripción
+    if (closeSubscriptionBtn) closeSubscriptionBtn.addEventListener('click', closeSubscriptionModal);
 }
 
+// Cerrar AMBAS modales con overlay o Escape
+if (overlay) overlay.addEventListener('click', () => {
+    closeAuthModal();
+    closeSubscriptionModal();
+});
 
-// ====================================================================
-// 4. LÓGICA DE FORMULARIOS Y SESIÓN (Sin cambios en la lógica)
-// ====================================================================
-
-if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
-        e.preventDefault(); 
-        const terms = loginTermsInput;
-        const loginName = loginEmailInput.value.split('@')[0].toUpperCase();
-        const loginEmail = loginEmailInput.value.trim();
-        
-        if (terms && !terms.checked) {
-            alert("Debes aceptar los términos y condiciones.");
-            return;
-        }
-
-        localStorage.setItem("nombreUsuario", loginName);
-        localStorage.setItem("correoUsuario", loginEmail);
-        
-        closeAuthModal(); 
-        window.location.href = "dashboard.html"; 
-    });
-}
-
-if (registerForm) {
-    registerForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        if (regPasswordInput.value !== regConfirmPasswordInput.value) {
-            alert("Las contraseñas no coinciden.");
-            return;
-        }
-
-        const regName = regNameInput.value.trim();
-        const regEmail = regEmailInput.value.trim();
-
-        // 1. Guardar como usuario de prueba
-        const nuevoUsuario = { nombre: regName, email: regEmail, edad: "N/A" }; 
-        let lista = JSON.parse(localStorage.getItem("usuarios")) || [];
-        lista.push(nuevoUsuario);
-        localStorage.setItem("usuarios", JSON.stringify(lista));
-
-        // 2. Iniciar sesión automáticamente
-        const sessionName = regName.split(' ')[0].toUpperCase();
-        localStorage.setItem("nombreUsuario", sessionName);
-        localStorage.setItem("correoUsuario", regEmail);
-
-        alert(`¡Bienvenido, ${sessionName}! Te has registrado e iniciado sesión.`);
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
         closeAuthModal();
-        window.location.href = "dashboard.html";
-    });
-}
-
-
-// ====================================================================
-// 5. FUNCIONES DE CIERRE/ELIMINACIÓN DE SESIÓN (Sin cambios)
-// ====================================================================
-
-function handleLogout(e) {
-    e.preventDefault(); 
-    localStorage.removeItem("nombreUsuario");
-    localStorage.removeItem("correoUsuario");
-    
-    if (document.getElementById("dashboardContent")) {
-        const statusMessage = document.getElementById("statusMessage");
-        if (statusMessage) {
-            statusMessage.className = 'message success';
-            statusMessage.textContent = "✅ Sesión cerrada. Los datos de sesión locales han sido eliminados.";
-            statusMessage.style.display = 'block';
-        }
+        closeSubscriptionModal();
     }
-    window.location.href = "Iniciar sesión.html";
-}
-
-function handleDeleteAccount() {
-    localStorage.clear(); 
-    
-    const statusMessage = document.getElementById("statusMessage");
-    if (statusMessage) {
-        statusMessage.className = 'message error';
-        statusMessage.textContent = "❌ Cuenta eliminada. Todos tus datos locales han sido borrados.";
-        statusMessage.style.display = 'block';
-    }
-    window.location.href = "Iniciar sesión.html";
-}
+});
 
 
-// ====================================================================
-// 6. VERIFICACIÓN DE SESIÓN (checkSession) (Sin cambios)
-// ====================================================================
+/* ====================================================================
+   4. GESTIÓN DE SESIÓN CON LOCALSTORAGE (Mantenida)
+   ... (El resto de la Sección 4 se mantiene igual, ya que no afecta a la nueva modal)
+   ==================================================================== */
 
+/**
+ * Verifica el localStorage y actualiza la vista de la página y la barra de navegación.
+ */
 function checkSession() {
     const nombreUsuario = localStorage.getItem("nombreUsuario");
     const correoUsuario = localStorage.getItem("correoUsuario");
     
-    // Lógica para la página de INICIO (index.html)
+    const isSessionActive = nombreUsuario && correoUsuario;
+
+    // Lógica para la barra de navegación (Aplica a todas las páginas)
+    if (loginLinkNav && dashboardLinkNav && logoutLinkNav) {
+        if (isSessionActive) {
+            loginLinkNav.classList.add('hidden');
+            dashboardLinkNav.classList.remove('hidden');
+            logoutLinkNav.classList.remove('hidden');
+        } else {
+            loginLinkNav.classList.remove('hidden');
+            dashboardLinkNav.classList.add('hidden');
+            logoutLinkNav.classList.add('hidden');
+        }
+    }
+
+
+    // Lógica para la página de INICIO (index.html) y LOGIN (Iniciar sesión.html)
     if (welcomeArea) {
-        if (nombreUsuario && correoUsuario) {
-            loginArea.style.display = 'none';
-            welcomeArea.style.display = 'flex';
+        if (isSessionActive) {
+            if (loginArea) loginArea.classList.add('hidden');
+            welcomeArea.classList.remove('hidden');
             document.getElementById("welcomeMessage").textContent = `¡Hola, ${nombreUsuario}!`;
             document.getElementById("sessionInfo").textContent = `Tu correo es: ${correoUsuario}`;
         } else {
-            loginArea.style.display = 'block';
-            welcomeArea.style.display = 'none';
+            if (loginArea) loginArea.classList.remove('hidden');
+            welcomeArea.classList.add('hidden');
         }
     }
     
     // Lógica para la página del DASHBOARD (dashboard.html)
     if (dashboardContent) {
         const statusMessage = document.getElementById("statusMessage");
-        if (statusMessage) statusMessage.style.display = 'none'; 
+        if (statusMessage) statusMessage.style.display = 'none';
 
-        if (nombreUsuario && correoUsuario) {
+        if (isSessionActive) {
             dashboardContent.style.display = 'block';
             if (noSessionMessage) noSessionMessage.style.display = 'none';
             
@@ -277,7 +248,7 @@ function checkSession() {
             document.getElementById("correoUsuario").textContent = "Correo: " + correoUsuario;
             
             if (usuariosRegistradosDiv) usuariosRegistradosDiv.style.display = 'block';
-            mostrarUsuarios(); 
+            mostrarUsuarios();
         } else {
             dashboardContent.style.display = 'none';
             if (noSessionMessage) noSessionMessage.style.display = 'block';
@@ -286,14 +257,124 @@ function checkSession() {
     }
 }
 
+// 4.1. LÓGICA DE LOGIN
+if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-// ====================================================================
-// 7. FUNCIONES CRUD DE USUARIOS DE PRUEBA (Sin cambios)
-// ====================================================================
+        const terms = loginTermsInput;
+        const loginName = loginEmailInput.value.split('@')[0].toUpperCase();
+        const loginEmail = loginEmailInput.value.trim();
+
+        if (terms && !terms.checked) {
+            alert("Debes aceptar los términos y condiciones.");
+            return;
+        }
+        
+        // ** INICIAR SESIÓN (Persistencia en localStorage) **
+        localStorage.setItem("nombreUsuario", loginName);
+        localStorage.setItem("correoUsuario", loginEmail);
+        
+        closeAuthModal();
+        
+        // Redirigir al Dashboard después de Iniciar Sesión
+        window.location.href = "dashboard.html";
+    });
+}
+
+// 4.2. LÓGICA DE REGISTRO
+if (registerForm) {
+    registerForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Validación de Contraseñas
+        if (regPasswordInput.value !== regConfirmPasswordInput.value) {
+            alert("Las contraseñas no coinciden.");
+            return;
+        }
+
+        const regName = regNameInput.value.trim();
+        const regEmail = regEmailInput.value.trim();
+
+        // 1. Guardar el usuario en la lista de prueba
+        const nuevoUsuario = { nombre: regName, email: regEmail, edad: "N/A" };
+        let lista = JSON.parse(localStorage.getItem("usuarios")) || [];
+        lista.push(nuevoUsuario);
+        localStorage.setItem("usuarios", JSON.stringify(lista));
+
+        // 2. ** INICIAR SESIÓN AUTOMÁTICAMENTE (Persistencia en localStorage) **
+        const sessionName = regName.split(' ')[0].toUpperCase();
+        localStorage.setItem("nombreUsuario", sessionName);
+        localStorage.setItem("correoUsuario", regEmail);
+
+        alert(`¡Bienvenido, ${sessionName}! Te has registrado e iniciado sesión.`);
+        
+        closeAuthModal();
+        // Redirigir al Dashboard después de Registrarse
+        window.location.href = "dashboard.html";
+    });
+}
+
+// 4.3. FUNCIONES DE CIERRE/ELIMINACIÓN DE SESIÓN (Usadas por botones en nav/dashboard)
+
+function handleLogout(e) {
+    if (e) e.preventDefault();
+    localStorage.removeItem("nombreUsuario");
+    localStorage.removeItem("correoUsuario");
+    
+    // Muestra mensaje de éxito si estamos en el dashboard
+    if (document.getElementById("dashboardContent")) {
+        const statusMessage = document.getElementById("statusMessage");
+        if (statusMessage) {
+            statusMessage.className = 'message success';
+            statusMessage.textContent = "✅ Sesión cerrada. Los datos de sesión locales han sido eliminados.";
+            statusMessage.style.display = 'block';
+        }
+    }
+    window.location.href = "Iniciar sesión.html"; // Redirigir a la página de login
+}
+
+function handleDeleteAccount() {
+    localStorage.clear(); // ELIMINA TODO (sesión y lista de usuarios de prueba)
+    
+    // Muestra mensaje de error si estamos en el dashboard
+    const statusMessage = document.getElementById("statusMessage");
+    if (statusMessage) {
+        statusMessage.className = 'message error';
+        statusMessage.textContent = "❌ Cuenta eliminada. Todos tus datos locales han sido borrados.";
+        statusMessage.style.display = 'block';
+    }
+    window.location.href = "Iniciar sesión.html"; // Redirigir a la página de login
+}
+
+// 4.4. ASIGNACIÓN DE EVENTOS DE SESIÓN
+if (cerrarSesionBtn) cerrarSesionBtn.addEventListener("click", handleLogout);
+if (eliminarCuentaBtn) eliminarCuentaBtn.addEventListener("click", handleDeleteAccount);
+
+document.querySelectorAll("#cerrarSesion, #eliminarCuenta").forEach(link => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (link.id === "cerrarSesion") {
+            handleLogout(e);
+        } else if (link.id === "eliminarCuenta") {
+            handleDeleteAccount();
+        }
+    });
+});
+
+
+/* ====================================================================
+   5. LÓGICA DE PRUEBA (CRUD DE USUARIOS - MANTENIDO)
+   ... (Se mantiene la misma lógica para el dashboard)
+   ==================================================================== */
+
+const btnGuardar = document.getElementById("btnGuardar");
+const btnVer = document.getElementById("btnVer");
+const btnBorrar = document.getElementById("btnBorrar");
+const btnLimpiarDashboard = document.getElementById("btnLimpiarDashboard");
 
 function limpiarFormulario() {
     if (!document.getElementById("nombre")) return;
-
     document.getElementById("nombre").value = "";
     document.getElementById("email").value = "";
     document.getElementById("edad").value = "";
@@ -311,7 +392,7 @@ function mostrarUsuarios() {
             resultado.style.display = "none";
             resultado.innerHTML = "";
             document.getElementById("btnVer").textContent = "Ver Datos";
-        } else { 
+        } else {
             resultado.innerHTML = "<p>No hay cuentas de prueba registradas aún.</p>";
         }
         return;
@@ -328,7 +409,6 @@ function mostrarUsuarios() {
                 <p><strong>Edad:</strong> ${u.edad}</p>
                 <button class="btn-borrar-individual btn-action btn-danger" data-index="${i}" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Borrar Usuario</button>
             </div>
-            ${document.getElementById("btnVer") ? '<hr>' : ''}
         `;
     });
 
@@ -349,80 +429,65 @@ function mostrarUsuarios() {
             mostrarUsuarios();
             const statusMessage = document.getElementById("statusMessage");
             if (statusMessage) {
-                 statusMessage.className = 'message success';
-                 statusMessage.textContent = `✅ Usuario #${index + 1} eliminado de la lista.`;
-                 statusMessage.style.display = 'block';
+                statusMessage.className = 'message success';
+                statusMessage.textContent = `✅ Usuario #${index + 1} eliminado de la lista.`;
+                statusMessage.style.display = 'block';
             }
         });
     });
 }
 
-// ====================================================================
-// 8. EVENTOS CRUD DE USUARIOS DE PRUEBA (Sin cambios)
-// ====================================================================
+// CRUD Events (Guardar, Ver, Borrar)
+if (btnGuardar) btnGuardar.addEventListener("click", () => {
+    const nombre = document.getElementById("nombre").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const edad = document.getElementById("edad").value.trim();
 
-if (btnGuardar) {
-    btnGuardar.addEventListener("click", () => {
-        const nombre = document.getElementById("nombre").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const edad = document.getElementById("edad").value.trim();
+    if (!nombre || !email || !edad) {
+        alert("Todos los campos son obligatorios.");
+        return;
+    }
+    const usuario = { nombre, email, edad };
+    let lista = JSON.parse(localStorage.getItem("usuarios")) || [];
+    lista.push(usuario);
+    localStorage.setItem("usuarios", JSON.stringify(lista));
+    alert("Guardado correctamente.");
+    limpiarFormulario();
+});
 
-        if (!nombre || !email || !edad) {
-            alert("Todos los campos son obligatorios.");
-            return;
-        }
-
-        const usuario = { nombre, email, edad };
-        let lista = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-        lista.push(usuario);
-        localStorage.setItem("usuarios", JSON.stringify(lista));
-
-        alert("Guardado correctamente.");
-        limpiarFormulario();
-    });
-}
-
-if (btnVer) {
-    btnVer.addEventListener("click", () => {
-        const resultado = document.getElementById("resultado");
-
-        if (resultado.style.display === "block") {
-            resultado.style.display = "none";
-            resultado.innerHTML = "";
-            btnVer.textContent = "Ver Datos";
-        } else {
-            mostrarUsuarios();
-        }
-    });
-}
-
-if (btnBorrar) {
-    btnBorrar.addEventListener("click", () => {
-        localStorage.removeItem("usuarios");
-        alert("Todos los datos de la lista de usuarios han sido eliminados.");
-        if (document.getElementById("resultado")) mostrarUsuarios(); 
-    });
-}
-
-if (btnLimpiarDashboard) {
-    btnLimpiarDashboard.addEventListener("click", () => {
-        localStorage.removeItem("usuarios");
-        
-        const statusMessage = document.getElementById("statusMessage");
-        if (statusMessage) {
-            statusMessage.className = 'message error';
-            statusMessage.textContent = "❌ Lista de usuarios de prueba eliminada.";
-            statusMessage.style.display = 'block';
-        }
+if (btnVer) btnVer.addEventListener("click", () => {
+    const resultado = document.getElementById("resultado");
+    if (resultado.style.display === "block") {
+        resultado.style.display = "none";
+        resultado.innerHTML = "";
+        btnVer.textContent = "Ver Datos";
+    } else {
         mostrarUsuarios();
-    });
-}
+    }
+});
+
+if (btnBorrar) btnBorrar.addEventListener("click", () => {
+    localStorage.removeItem("usuarios");
+    alert("Todos los datos de la lista de usuarios han sido eliminados.");
+    if (document.getElementById("resultado")) mostrarUsuarios();
+});
+
+if (btnLimpiarDashboard) btnLimpiarDashboard.addEventListener("click", () => {
+    localStorage.removeItem("usuarios");
+    const statusMessage = document.getElementById("statusMessage");
+    if (statusMessage) {
+        statusMessage.className = 'message error';
+        statusMessage.textContent = "❌ Lista de usuarios de prueba eliminada.";
+        statusMessage.style.display = 'block';
+    }
+    mostrarUsuarios();
+});
 
 
-// ====================================================================
-// 9. DASHBOARD (GRÁFICA) (Sin cambios)
-// ====================================================================
+/* ====================================================================
+   6. DASHBOARD (GRÁFICA) Y EJECUCIÓN INICIAL
+   ... (Se mantiene la misma lógica para el dashboard)
+   ==================================================================== */
 
 if (document.getElementById("grafico")) {
     let usuarios = 350;
@@ -434,237 +499,45 @@ if (document.getElementById("grafico")) {
     document.getElementById("activos").textContent = activos;
 
     let canvas = document.getElementById("grafico");
-    let ctx = canvas.getContext("2d");
+    if (canvas) {
+        let ctx = canvas.getContext("2d");
 
-    let datos = [usuarios, partidos, activos];
-    let colores = ["#ff5c00", "#ffa559", "#ff7f32"];
-    let etiquetas = ["Usuarios", "Partidos", "Activos"];
+        let datos = [usuarios, partidos, activos];
+        let colores = ["#ff5c00", "#ffa559", "#ff7f32"];
+        let etiquetas = ["Usuarios", "Partidos", "Activos"];
+        
+        // Dibujar gráfico de barras (simulación)
+        ctx.clearRect(0, 0, canvas.width, canvas.height); 
+        
+        const chartHeight = 150;
+        const chartYStart = canvas.height - 20;
+        const barWidth = 40;
+        const spacing = 60;
+        const scaleFactor = chartHeight / Math.max(...datos);
+        
+        for (let i = 0; i < datos.length; i++) {
+            let barHeight = datos[i] * scaleFactor;
+            let x = 50 + i * (barWidth + spacing);
+            let y = chartYStart - barHeight;
 
-    for (let i = 0; i < datos.length; i++) {
-        let x = 80 + i * 120;
-        let y = 150 - datos[i] / 3;
+            // Dibujar barra
+            ctx.fillStyle = colores[i];
+            ctx.fillRect(x, y, barWidth, barHeight);
 
-        ctx.fillStyle = colores[i];
-        ctx.fillRect(x, y, 80, datos[i] / 3);
+            // Dibujar etiqueta de valor
+            ctx.fillStyle = "#333";
+            ctx.font = "12px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText(datos[i], x + barWidth / 2, y - 5); 
 
-        ctx.fillStyle = "#000";
-        ctx.font = "14px Arial";
-        ctx.fillText(etiquetas[i], x + 5, 145);
+            // Dibujar etiqueta de categoría
+            ctx.fillStyle = "#000";
+            ctx.font = "14px Arial";
+            ctx.fillText(etiquetas[i], x + barWidth / 2, chartYStart + 15);
+        }
     }
 }
 
 
-// ====================================================================
-// 10. ASIGNACIÓN DE EVENTOS FINALES (Sin cambios)
-// ====================================================================
-
-// Botones de cierre/eliminación del Dashboard
-if (cerrarSesionBtn) cerrarSesionBtn.addEventListener("click", handleLogout);
-if (eliminarCuentaBtn) eliminarCuentaBtn.addEventListener("click", handleDeleteAccount);
-
-// Enlaces del nav
-document.querySelectorAll("#cerrarSesion, #eliminarCuenta").forEach(link => {
-    link.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (link.id === "cerrarSesion") {
-            handleLogout(e);
-        } else if (link.id === "eliminarCuenta") {
-            handleDeleteAccount();
-        }
-    });
-});
-
-
-/* ====================================================================
-   11. EJECUCIÓN INICIAL (Sin cambios)
-   ==================================================================== */
+// Ejecución inicial al cargar la página:
 document.addEventListener("DOMContentLoaded", checkSession);
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Elementos de la Modal
-    const authModal = document.getElementById('authModal');
-    const overlay = document.querySelector('.overlay');
-    
-    // Botones de Apertura y Cierre
-    const openAuthModalBtn = document.getElementById('openAuthModal');
-    const closeBtn = authModal.querySelector('.auth-close');
-
-    // 2. Elementos de las Pestañas
-    const tabLogin = document.getElementById('tabLogin');
-    const tabRegister = document.getElementById('tabRegister');
-    const loginView = document.getElementById('loginView');
-    const registerView = document.getElementById('registerView');
-
-    // Enlaces de cambio rápido entre formularios
-    const switchToRegisterLink = document.getElementById('switchToRegister');
-    const switchToLoginLink = document.getElementById('switchToLogin');
-    
-    // Función para abrir la modal
-    function openModal(initialTab = 'login') {
-        authModal.classList.remove('hidden');
-        overlay.classList.remove('hidden');
-        // Asegura que la vista correcta esté activa al abrir
-        if (initialTab === 'register') {
-             switchTab(tabRegister, registerView);
-        } else {
-             switchTab(tabLogin, loginView);
-        }
-    }
-
-    // Función para cerrar la modal
-    function closeModal() {
-        authModal.classList.add('hidden');
-        overlay.classList.add('hidden');
-    }
-
-    // Función para cambiar la pestaña activa
-    function switchTab(clickedTab, targetView) {
-        // Remover 'active' de todas las pestañas y vistas
-        tabLogin.classList.remove('active');
-        tabRegister.classList.remove('active');
-        loginView.classList.remove('active');
-        registerView.classList.remove('active');
-
-        // Agregar 'active' a la pestaña y vista seleccionadas
-        clickedTab.classList.add('active');
-        targetView.classList.add('active');
-    }
-
-    // --- MANEJO DE EVENTOS ---
-    
-    // ABRIR MODAL
-    openAuthModalBtn.addEventListener('click', () => openModal('login'));
-
-    // CERRAR MODAL
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !authModal.classList.contains('hidden')) {
-            closeModal();
-        }
-    });
-
-    // CAMBIO DE PESTAÑAS (TABS)
-    tabLogin.addEventListener('click', () => switchTab(tabLogin, loginView));
-    tabRegister.addEventListener('click', () => switchTab(tabRegister, registerView));
-
-    // CAMBIO DE ENLACES (DENTRO DEL FORMULARIO)
-    switchToRegisterLink.addEventListener('click', () => switchTab(tabRegister, registerView));
-    switchToLoginLink.addEventListener('click', () => switchTab(tabLogin, loginView));
-    
-    // MANEJO DEL OJO (Toggle Password Visibility)
-    const togglePasswords = authModal.querySelectorAll('.toggle-password');
-    togglePasswords.forEach(icon => {
-        icon.addEventListener('click', () => {
-            const passwordInput = icon.previousElementSibling;
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        });
-    });
-
-    // Nota: Aquí iría la lógica de envío de formularios (loginForm, registerForm)
-});
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Elementos de la Modal
-    const authModal = document.getElementById('authModal');
-    const overlay = document.querySelector('.overlay');
-    
-    // Botones de Apertura (Ambos en la página principal)
-    const openAuthModalBtnLogin = document.getElementById('openAuthModal');
-    const openAuthModalBtnRegister = document.getElementById('openAuthModal2');
-    const closeBtn = authModal.querySelector('.auth-close');
-
-    // 2. Elementos de las Pestañas
-    const tabLogin = document.getElementById('tabLogin');
-    const tabRegister = document.getElementById('tabRegister');
-    const loginView = document.getElementById('loginView');
-    const registerView = document.getElementById('registerView');
-
-    // Enlaces de cambio rápido entre formularios
-    const switchToRegisterLink = document.getElementById('switchToRegister');
-    const switchToLoginLink = document.getElementById('switchToLogin');
-    
-    // Función central para cambiar la pestaña y la vista
-    function switchTab(clickedTab, targetView) {
-        // Remover 'active' de todas las pestañas y vistas
-        tabLogin.classList.remove('active');
-        tabRegister.classList.remove('active');
-        loginView.classList.remove('active');
-        registerView.classList.remove('active');
-
-        // Agregar 'active' a la pestaña y vista seleccionadas
-        clickedTab.classList.add('active');
-        targetView.classList.add('active');
-    }
-
-    // Función para abrir la modal
-    function openModal(initialTab = 'login') {
-        authModal.classList.remove('hidden');
-        overlay.classList.remove('hidden');
-        
-        // Determina qué pestaña debe estar activa al abrir
-        if (initialTab === 'register') {
-             switchTab(tabRegister, registerView);
-        } else {
-             switchTab(tabLogin, loginView);
-        }
-    }
-
-    // Función para cerrar la modal
-    function closeModal() {
-        authModal.classList.add('hidden');
-        overlay.classList.add('hidden');
-    }
-
-    // --- MANEJO DE EVENTOS ---
-    
-    // ABRIR MODAL: BOTÓN "Iniciar sesión"
-    if (openAuthModalBtnLogin) {
-        openAuthModalBtnLogin.addEventListener('click', () => openModal('login'));
-    }
-
-    // ABRIR MODAL: BOTÓN "Registro"
-    if (openAuthModalBtnRegister) {
-        openAuthModalBtnRegister.addEventListener('click', () => openModal('register'));
-    }
-
-
-    // CERRAR MODAL
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !authModal.classList.contains('hidden')) {
-            closeModal();
-        }
-    });
-
-    // CAMBIO DE PESTAÑAS (TABS)
-    if (tabLogin && loginView) {
-        tabLogin.addEventListener('click', () => switchTab(tabLogin, loginView));
-    }
-    if (tabRegister && registerView) {
-        tabRegister.addEventListener('click', () => switchTab(tabRegister, registerView));
-    }
-
-    // CAMBIO DE ENLACES (DENTRO DEL FORMULARIO)
-    if (switchToRegisterLink) {
-        switchToRegisterLink.addEventListener('click', () => switchTab(tabRegister, registerView));
-    }
-    if (switchToLoginLink) {
-        switchToLoginLink.addEventListener('click', () => switchTab(tabLogin, loginView));
-    }
-    
-    // MANEJO DEL OJO (Toggle Password Visibility)
-    const togglePasswords = authModal ? authModal.querySelectorAll('.toggle-password') : [];
-    togglePasswords.forEach(icon => {
-        icon.addEventListener('click', () => {
-            const passwordInput = icon.previousElementSibling;
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            // Cambia el ícono del ojo
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        });
-    });
-});
